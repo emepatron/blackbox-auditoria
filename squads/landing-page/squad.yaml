@@ -1,0 +1,24 @@
+name: Auditoria de Landing Page
+code: landing-page
+description: "Squad que conduz a auditoria de uma landing page (página única de conversão). O analista de conversão audita rastreamento, performance/técnico, estrutura/CTA, copy/oferta e confiança/LGPD, usando as skills por ponto e preenchendo a planilha-gabarito."
+icon: "🎯"
+version: "1.0.0"
+
+agents:
+  - agents/analista-conversao.agent.md
+
+skills:
+  - lp-coletar
+  - lp-tecnico
+  - lp-conversao
+  - lp-preencher
+
+gabarito: "planilhas/Auditoria de Landing Page - V4.xlsx"
+
+como_funciona: |
+  1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma a URL da LP e o que ela deve converter.
+  2. Garante o contexto e os acessos com a skill lp-coletar (URL, e — se houver — GA4/PageSpeed).
+  3. Audita o lado técnico com lp-tecnico (rastreamento + Core Web Vitals/performance/responsivo/HTTPS).
+  4. Audita o lado de conversão com lp-conversao (estrutura/CTA único, promessa above the fold, prova social, copy/oferta, confiança/LGPD).
+  5. A skill lp-preencher consolida os achados na planilha e em achados/landing-page.md.
+  6. O analista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).

@@ -1,0 +1,29 @@
+name: Auditoria de Campanhas
+code: campanhas
+description: "Squad que conduz a auditoria de tráfego pago (Meta, Google, LinkedIn, TikTok). O estrategista orquestra; cada persona de plataforma audita sua frente; as skills por ponto fazem o trabalho e preenchem a planilha-gabarito."
+icon: "📊"
+version: "1.0.0"
+
+agents:
+  - agents/estrategista-trafego.agent.md
+  - agents/google-ads.agent.md
+  - agents/meta-ads.agent.md
+  - agents/tiktok-ads.agent.md
+  - agents/linkedin-ads.agent.md
+
+skills:
+  - campanhas-coletar
+  - campanhas-tracking
+  - campanhas-criativos
+  - campanhas-metricas
+  - campanhas-preencher
+
+gabarito: "planilhas/Auditoria de Campanhas - V4.xlsx"
+
+como_funciona: |
+  1. O estrategista lê o dossiê (auditorias/<cliente>/00-dossie.md) e define quais plataformas auditar.
+  2. Para cada plataforma ativa, a persona correspondente conduz a auditoria da sua aba na planilha,
+     usando as skills por ponto (coletar, tracking, criativos, metricas).
+  3. A aba Fundamentos (cross-channel) é responsabilidade do estrategista.
+  4. A skill campanhas-preencher consolida os achados na planilha e em achados/campanhas.md.
+  5. O estrategista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).

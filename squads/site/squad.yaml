@@ -1,0 +1,30 @@
+name: Auditoria de Site Institucional
+code: site
+description: "Squad que conduz a auditoria de um site institucional (presença digital multi-página). O analista de site percorre a planilha-gabarito seção a seção; as skills por ponto fazem o trabalho técnico, de estrutura e de conversão, e preenchem o gabarito."
+icon: "🌐"
+version: "1.0.0"
+
+agents:
+  - agents/analista-site.agent.md
+
+skills:
+  - site-coletar
+  - site-tecnico
+  - site-estrutura
+  - site-conversao
+  - site-preencher
+
+gabarito: "planilhas/Auditoria de Site Institucional - V4.xlsx"
+
+como_funciona: |
+  1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma a URL e os acessos disponíveis.
+  2. Garante a URL e (quando houver) GA4/Search Console/PageSpeed via skill site-coletar.
+  3. Audita a aba Site Institucional por seção:
+     - 1.1 Infraestrutura/segurança/técnico → site-tecnico
+     - 1.2 Estrutura/navegação + 1.3 Conteúdo/credibilidade → site-estrutura
+     - 1.4 SEO on-page básico + 1.5 Conversão/contato/mensuração → site-conversao
+  4. A skill site-preencher consolida os achados na planilha e em achados/site.md.
+  5. O analista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).
+
+  Escopo: é um site INSTITUCIONAL (multi-página, presença e credibilidade) — não landing page nem e-commerce.
+  SEO profundo (técnico avançado, conteúdo, link building) é a frente SEO/GEO; aqui é só o on-page básico.

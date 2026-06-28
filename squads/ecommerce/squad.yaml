@@ -1,0 +1,28 @@
+name: Auditoria de E-commerce
+code: ecommerce
+description: "Squad que conduz a auditoria completa de uma loja virtual: tecnologia (infra, checkout, frete, rastreamento), design e UX (PDP, carrinho, mobile), marketing e aquisição (canal, oferta, criativos, funil) e pós-venda/encantamento (acompanhamento, retenção, LTV). O analista orquestra; as skills por ponto fazem o trabalho e preenchem a planilha-gabarito."
+icon: "🛒"
+version: "1.0.0"
+
+agents:
+  - agents/analista-ecommerce.agent.md
+
+skills:
+  - ecommerce-tecnologia
+  - ecommerce-ux
+  - ecommerce-aquisicao
+  - ecommerce-posvenda
+  - ecommerce-preencher
+
+gabarito: "planilhas/Checklist Auditoria E-commerce - V4.xlsx"
+
+como_funciona: |
+  1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma plataforma, ticket e canais.
+  2. Cada skill por ponto mapeia uma aba da planilha:
+     - ecommerce-tecnologia → aba "1. Tecnologia"
+     - ecommerce-ux → aba "2. Design e UX"
+     - ecommerce-aquisicao → aba "3. Marketing e Aquisição"
+     - ecommerce-posvenda → aba "4. Pós-venda e Encantamento"
+  3. A skill ecommerce-preencher consolida os achados na planilha (Status na coluna E,
+     Observações na coluna F) e em achados/ecommerce.md.
+  4. O analista sintetiza por impacto e devolve o controle para a skill iniciar (próxima frente ou relatório).

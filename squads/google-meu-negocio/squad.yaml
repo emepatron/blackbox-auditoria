@@ -1,0 +1,27 @@
+name: Auditoria de Google Meu Negócio
+code: google-meu-negocio
+description: "Squad que conduz a auditoria do Perfil da Empresa no Google (Google Business Profile). O analista de presença local audita perfil, conteúdo, reputação, engajamento e SEO local; as skills por ponto fazem o trabalho e preenchem a planilha-gabarito."
+icon: "📍"
+version: "1.0.0"
+
+agents:
+  - agents/analista-local.agent.md
+
+skills:
+  - gmn-coletar
+  - gmn-perfil
+  - gmn-reputacao
+  - gmn-local-seo
+  - gmn-preencher
+
+gabarito: "planilhas/Auditoria de Google Meu Negócio - V4.xlsx"
+
+como_funciona: |
+  1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma o perfil do negócio a auditar.
+  2. A skill gmn-coletar garante o link do perfil e (opcional) prints dos Insights antes de auditar.
+  3. O analista percorre a única aba "Google Meu Negócio" por seção, usando as skills por ponto:
+     - gmn-perfil → seções 1.1 (verificação e dados) e 1.2 (conteúdo e mídia).
+     - gmn-reputacao → seções 1.3 (avaliações) e 1.4 (engajamento: posts e Q&A).
+     - gmn-local-seo → seção 1.5 (SEO local e mensuração).
+  4. A skill gmn-preencher consolida os achados na planilha e em achados/google-meu-negocio.md.
+  5. O analista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).

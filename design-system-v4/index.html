@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design System V4 Aguiar &amp; CO — Guia de Aplicação</title>
+<link rel="icon" type="image/jpeg" href="assets/v4-logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     TOKENS — Design System V4 (light)
+     ============================================ */
+  :root {
+    --c-brand: #FF0037;
+    --c-brand-deep: #C8002B;
+    --c-brand-soft: rgba(255,0,55,0.08);
+    --c-brand-strong: rgba(255,0,55,0.18);
+
+    --c-text: #0A0A0A;
+    --c-text-2: #3A3A42;
+    --c-text-3: #5A5A62;
+    --c-text-4: #8A8A92;
+
+    --c-bg: #FFFFFF;
+    --c-bg-alt: #FAFAFA;
+    --c-surface: #F4F4F5;
+    --c-surface-2: #EAEAEC;
+
+    --c-border: rgba(0,0,0,0.10);
+    --c-border-strong: rgba(0,0,0,0.16);
+
+    --c-success: #16A34A;
+    --c-success-soft: rgba(22,163,74,0.10);
+    --c-warning: #D97706;
+    --c-warning-soft: rgba(217,119,6,0.10);
+    --c-error: #DC2626;
+    --c-error-soft: rgba(220,38,38,0.10);
+    --c-info: #2563EB;
+    --c-info-soft: rgba(37,99,235,0.10);
+
+    --f-display: 'Space Grotesk', system-ui, sans-serif;
+    --f-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --f-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+    --max-w: 1180px;
+    --pad-x: clamp(20px, 4vw, 40px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--f-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: var(--max-w); margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
+  section { padding: 80px 0; border-bottom: 1px solid var(--c-border); }
+  section.alt { background: var(--c-bg-alt); }
+  @media (max-width: 768px) { section { padding: 56px 0; } }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    color: var(--c-text);
+  }
+  h1 { font-size: clamp(36px, 5vw, 60px); }
+  h2 { font-size: clamp(28px, 3.5vw, 42px); margin-bottom: 32px; }
+  h3 { font-size: clamp(22px, 2.4vw, 30px); margin-bottom: 16px; }
+  h4 { font-size: 19px; margin-bottom: 12px; }
+  h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-text-3); margin-bottom: 12px; font-weight: 700; }
+  p { margin: 0 0 16px; color: var(--c-text-2); font-size: 16px; }
+  p.lead { font-size: 19px; color: var(--c-text); line-height: 1.55; }
+  strong { color: var(--c-text); font-weight: 600; }
+  code { font-family: var(--f-mono); font-size: 13px; background: var(--c-surface); padding: 2px 7px; border-radius: 4px; color: var(--c-text); border: 1px solid var(--c-border); }
+  a { color: var(--c-brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ============================================
+     NAV
+     ============================================ */
+  .nav {
+    position: sticky; top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--c-border);
+    z-index: 50;
+  }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 12px var(--pad-x);
+    display: flex; align-items: center; gap: 24px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--f-display); font-weight: 700; font-size: 15px;
+    color: var(--c-text); text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nav-brand img { width: 26px; height: 26px; border-radius: 5px; object-fit: cover; }
+  .nav-links { display: flex; gap: 4px; flex: 1; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    padding: 6px 10px; font-size: 12.5px; color: var(--c-text-2); text-decoration: none;
+    border-radius: 6px; font-weight: 500; white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--c-surface); color: var(--c-text); }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    background: linear-gradient(180deg, #fff 0%, var(--c-bg-alt) 100%);
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--c-border);
+    position: relative;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+    width: 6px; background: var(--c-brand);
+  }
+  .hero .v4-mark { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+  .hero .v4-mark img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; }
+  .hero .v4-mark .lbl { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--c-text); line-height: 1.2; }
+  .hero .v4-mark .lbl span { color: var(--c-text-3); display: block; font-size: 13px; font-weight: 500; margin-top: 4px; }
+  .hero .eyebrow {
+    display: inline-block;
+    font-family: var(--f-mono); font-size: 12px; color: var(--c-brand);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 16px; font-weight: 600;
+  }
+  .hero h1 { margin-bottom: 24px; }
+  .hero h1 .accent { color: var(--c-brand); }
+  .hero p.lead { max-width: 760px; font-size: 21px; color: var(--c-text-2); }
+  .hero-meta { margin-top: 40px; display: flex; gap: 32px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--c-border); }
+  .hero-meta .item { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta .item .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-text-3); font-weight: 600; }
+  .hero-meta .item .val { font-size: 15px; color: var(--c-text); font-weight: 600; font-family: var(--f-display); }
+
+  /* ============================================
+     SECTION HEAD
+     ============================================ */
+  .section-num {
+    display: inline-block; font-family: var(--f-mono); font-size: 13px;
+    color: var(--c-text-3); letter-spacing: 0.1em; margin-bottom: 12px;
+    text-transform: uppercase; font-weight: 600;
+  }
+
+  /* ============================================
+     PRINCIPLES
+     ============================================ */
+  .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 32px; }
+  .principle {
+    border: 1px solid var(--c-border); border-radius: 12px; padding: 28px;
+    background: var(--c-bg);
+  }
+  .principle .num {
+    font-family: var(--f-display); font-size: 38px; font-weight: 700;
+    color: var(--c-brand); line-height: 1; margin-bottom: 16px;
+  }
+  .principle h4 { margin-bottom: 8px; font-size: 17px; }
+  .principle p { font-size: 14px; margin: 0; color: var(--c-text-2); }
+
+  /* ============================================
+     COLOR PALETTE
+     ============================================ */
+  .palette-group { margin-bottom: 48px; }
+  .palette-group h4 { font-size: 12px; font-family: var(--f-mono); text-transform: uppercase; letter-spacing: 0.15em; color: var(--c-text-3); margin-bottom: 20px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .swatch {
+    border: 1px solid var(--c-border); border-radius: 10px; overflow: hidden;
+    background: var(--c-bg); cursor: pointer; transition: transform 0.15s, border-color 0.15s;
+  }
+  .swatch:hover { transform: translateY(-2px); border-color: var(--c-border-strong); }
+  .swatch .color { height: 80px; }
+  .swatch .meta { padding: 14px; }
+  .swatch .name { font-family: var(--f-display); font-weight: 600; font-size: 14px; color: var(--c-text); margin-bottom: 4px; }
+  .swatch .hex { font-family: var(--f-mono); font-size: 12px; color: var(--c-text-3); }
+  .swatch .var { font-family: var(--f-mono); font-size: 10px; color: var(--c-text-4); margin-top: 2px; }
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+  .type-row {
+    display: grid; grid-template-columns: 200px 1fr;
+    align-items: center; gap: 24px; padding: 28px 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-row .label {
+    font-family: var(--f-mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--c-text-3);
+  }
+  .type-row .label .size { color: var(--c-text); font-size: 13px; margin-top: 4px; display: block; }
+  .type-display { font-family: var(--f-display); font-weight: 700; }
+  .type-body { font-family: var(--f-body); }
+  .type-mono { font-family: var(--f-mono); }
+
+  .font-card {
+    border: 1px solid var(--c-border); border-radius: 12px; padding: 32px;
+    margin-bottom: 16px;
+  }
+  .font-card .name { font-size: 28px; margin-bottom: 4px; }
+  .font-card .meta { font-family: var(--f-mono); font-size: 12px; color: var(--c-text-3); margin-bottom: 20px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .font-card .preview { font-size: 36px; line-height: 1.2; color: var(--c-text); margin-bottom: 16px; }
+  .font-card .alpha { font-size: 14px; color: var(--c-text-3); }
+
+  /* ============================================
+     COMPONENTS
+     ============================================ */
+  .component {
+    border: 1px solid var(--c-border); border-radius: 14px; overflow: hidden;
+    margin-bottom: 32px; background: var(--c-bg);
+  }
+  .component-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--c-border);
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--c-bg);
+  }
+  .component-header h4 { margin: 0; font-size: 17px; }
+  .component-header .tag { font-family: var(--f-mono); font-size: 10px; padding: 4px 10px; background: var(--c-brand-soft); color: var(--c-brand); border-radius: 100px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+  .component-preview { padding: 36px 28px; background: var(--c-bg-alt); border-bottom: 1px solid var(--c-border); }
+  .component-specs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  }
+  .spec-block { padding: 22px 24px; border-right: 1px solid var(--c-border); }
+  .spec-block:last-child { border-right: none; }
+  .spec-block .spec-label {
+    font-family: var(--f-mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--c-text-3); margin-bottom: 12px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .spec-block .spec-label .icon {
+    width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--c-surface); border-radius: 4px; font-size: 10px;
+  }
+  .spec-block ul { list-style: none; padding: 0; margin: 0; }
+  .spec-block ul li {
+    font-family: var(--f-mono); font-size: 12px; color: var(--c-text-2);
+    padding: 4px 0; line-height: 1.5;
+  }
+  .spec-block ul li strong { color: var(--c-text); font-weight: 600; }
+  @media (max-width: 768px) {
+    .component-specs { grid-template-columns: 1fr; }
+    .spec-block { border-right: none; border-bottom: 1px solid var(--c-border); }
+    .spec-block:last-child { border-bottom: none; }
+  }
+
+  /* ============================================
+     COMPONENT EXAMPLES (live previews)
+     ============================================ */
+  /* Top nav demo */
+  .demo-topnav {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 16px; background: #fff;
+    border: 1px solid var(--c-border); border-radius: 10px;
+  }
+  .demo-topnav img { width: 22px; height: 22px; border-radius: 5px; }
+  .demo-topnav .brand { font-family: var(--f-display); font-weight: 700; font-size: 13px; color: var(--c-text); }
+  .demo-topnav .nav-num { margin-left: auto; font-family: var(--f-mono); font-size: 11px; color: var(--c-text-3); letter-spacing: 0.1em; }
+
+  /* Hero demo */
+  .demo-hero {
+    background: linear-gradient(180deg, #fff 0%, var(--c-bg-alt) 100%);
+    border: 1px solid var(--c-border); border-radius: 12px;
+    padding: 40px 36px; position: relative; overflow: hidden;
+  }
+  .demo-hero::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--c-brand); }
+  .demo-hero .eyebrow { font-family: var(--f-mono); font-size: 10px; color: var(--c-brand); letter-spacing: 0.18em; font-weight: 600; }
+  .demo-hero h2 { margin: 12px 0 8px; font-size: 36px; }
+  .demo-hero p { font-size: 16px; color: var(--c-text-2); margin: 0; }
+
+  /* Section header demo */
+  .demo-sectionhdr {
+    padding: 24px; background: #fff;
+    border: 1px solid var(--c-border); border-radius: 10px;
+  }
+  .demo-sectionhdr .num { font-family: var(--f-mono); font-size: 11px; color: var(--c-brand); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; }
+  .demo-sectionhdr .title { font-family: var(--f-display); font-size: 28px; font-weight: 700; color: var(--c-text); margin: 8px 0 4px; line-height: 1.1; }
+  .demo-sectionhdr .sub { font-family: var(--f-body); font-size: 13px; color: var(--c-text-3); }
+
+  /* KPI demo */
+  .demo-kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .demo-kpi {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 8px;
+    padding: 18px 18px 14px; position: relative; overflow: hidden;
+  }
+  .demo-kpi.accent::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--c-brand); }
+  .demo-kpi .lbl { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.15em; color: var(--c-text-3); font-weight: 600; text-transform: uppercase; }
+  .demo-kpi .val { font-family: var(--f-display); font-weight: 700; font-size: 26px; color: var(--c-text); margin-top: 8px; line-height: 1; }
+  .demo-kpi .sub { font-family: var(--f-body); font-size: 11px; color: var(--c-text-2); margin-top: 8px; }
+  .demo-kpi .sub.up { color: var(--c-success); font-weight: 600; }
+  .demo-kpi .sub.down { color: var(--c-error); font-weight: 600; }
+
+  /* Bullet card demo */
+  .demo-bullet {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 8px;
+    padding: 22px 24px; position: relative;
+  }
+  .demo-bullet::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--c-success); border-radius: 8px 0 0 8px; }
+  .demo-bullet .ttl { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--c-text); }
+  .demo-bullet .sub-ttl { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--c-success); margin: 6px 0 14px; font-weight: 600; }
+  .demo-bullet ul { list-style: none; padding: 0; margin: 0; }
+  .demo-bullet ul li { font-family: var(--f-body); font-size: 13px; color: var(--c-text-2); padding: 4px 0; line-height: 1.5; }
+  .demo-bullet ul li::before { content: '→  '; color: var(--c-text-3); }
+
+  /* Alert demo */
+  .demo-alert {
+    background: var(--c-surface); border-radius: 0 8px 8px 0;
+    padding: 16px 22px; border-left: 4px solid var(--c-brand);
+    font-family: var(--f-body); font-size: 14px; color: var(--c-text);
+  }
+  .demo-alert.warning { border-color: var(--c-warning); }
+  .demo-alert.info { border-color: var(--c-info); }
+  .demo-alert.success { border-color: var(--c-success); }
+
+  /* Table demo */
+  .demo-table {
+    width: 100%; border-collapse: collapse; border: 1px solid var(--c-border);
+    border-radius: 8px; overflow: hidden; font-size: 13px;
+  }
+  .demo-table thead { background: var(--c-text); color: #fff; }
+  .demo-table thead th {
+    padding: 12px 14px; text-align: left; font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; font-weight: 600; text-transform: uppercase;
+  }
+  .demo-table tbody td { padding: 11px 14px; border-bottom: 1px solid var(--c-border); }
+  .demo-table tbody tr:nth-child(even) { background: var(--c-bg-alt); }
+  .demo-table tbody td.num { font-family: var(--f-mono); }
+  .demo-table tbody td.up { color: var(--c-success); font-weight: 600; }
+  .demo-table tbody td.down { color: var(--c-error); font-weight: 600; }
+
+  /* Badge demo */
+  .demo-badge-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .demo-badge {
+    font-family: var(--f-mono); font-size: 11px; padding: 5px 12px;
+    border-radius: 100px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+  }
+  .demo-badge.alta { background: var(--c-error-soft); color: var(--c-error); }
+  .demo-badge.media { background: var(--c-warning-soft); color: var(--c-warning); }
+  .demo-badge.baixa { background: var(--c-surface); color: var(--c-text-3); }
+
+  /* Status grid demo */
+  .demo-status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .demo-status {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 8px;
+    padding: 18px; position: relative; overflow: hidden;
+  }
+  .demo-status::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .demo-status.s1::before { background: var(--c-info); }
+  .demo-status.s2::before { background: var(--c-warning); }
+  .demo-status.s3::before { background: var(--c-error); }
+  .demo-status.s4::before { background: var(--c-success); }
+  .demo-status .icon { font-size: 22px; }
+  .demo-status .ttl { font-family: var(--f-display); font-weight: 700; font-size: 15px; margin-top: 10px; color: var(--c-text); }
+  .demo-status .sub { font-family: var(--f-mono); font-size: 9px; color: var(--c-text-3); letter-spacing: 0.1em; margin-top: 4px; text-transform: uppercase; }
+
+  /* ============================================
+     SPACING
+     ============================================ */
+  .spacing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
+  .spacing-cell {
+    border: 1px solid var(--c-border); border-radius: 10px; padding: 22px; text-align: center;
+  }
+  .spacing-cell .bar { background: var(--c-brand-soft); height: 8px; border-radius: 4px; margin: 0 auto 16px; border: 1px solid var(--c-brand-strong); }
+  .spacing-cell .name { font-family: var(--f-mono); font-size: 12px; font-weight: 600; color: var(--c-text); }
+  .spacing-cell .px { font-family: var(--f-mono); font-size: 11px; color: var(--c-text-3); margin-top: 4px; }
+
+  /* ============================================
+     ANTI-PATTERNS
+     ============================================ */
+  .anti-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .anti {
+    border-radius: 12px; padding: 24px; border: 1px solid var(--c-border);
+  }
+  .anti.bad { background: var(--c-error-soft); border-color: var(--c-error); }
+  .anti.good { background: var(--c-success-soft); border-color: var(--c-success); }
+  .anti .label {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 12px;
+  }
+  .anti.bad .label { color: var(--c-error); }
+  .anti.good .label { color: var(--c-success); }
+  .anti ul { padding-left: 20px; margin: 0; }
+  .anti ul li { font-size: 14px; color: var(--c-text-2); margin-bottom: 6px; line-height: 1.5; }
+  @media (max-width: 768px) { .anti-grid { grid-template-columns: 1fr; } }
+
+  /* ============================================
+     HOW TO APPLY
+     ============================================ */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+  .tool-card {
+    border: 1px solid var(--c-border); border-radius: 12px; padding: 28px;
+    background: var(--c-bg);
+  }
+  .tool-card h4 {
+    font-size: 17px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .tool-card h4 .ico { font-size: 22px; }
+  .tool-card .stack { font-family: var(--f-mono); font-size: 10px; color: var(--c-brand); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+  .tool-card ol { padding-left: 20px; margin: 0; }
+  .tool-card ol li { font-size: 14px; color: var(--c-text-2); margin-bottom: 8px; line-height: 1.5; }
+  .tool-card ol li strong { color: var(--c-text); }
+  .tool-card code { font-size: 12px; }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  footer {
+    padding: 60px 0; text-align: center; border-top: 1px solid var(--c-border);
+    background: var(--c-bg-alt);
+  }
+  footer p { color: var(--c-text-3); font-size: 13px; margin: 6px 0; }
+  footer .v4-mark img { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 16px; }
+
+  /* ============================================
+     UTILS
+     ============================================ */
+  .copyable { cursor: pointer; user-select: all; }
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--c-text); color: #fff; padding: 12px 20px; border-radius: 8px;
+    font-family: var(--f-mono); font-size: 12px; opacity: 0; pointer-events: none;
+    transition: opacity 0.2s; z-index: 100;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ============================================ NAV ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">
+      <img src="assets/v4-logo.jpg" alt="V4" />
+      <span>Design System V4</span>
+    </a>
+    <div class="nav-links">
+      <a href="#principios">Princípios</a>
+      <a href="#cores">Cores</a>
+      <a href="#tipografia">Tipografia</a>
+      <a href="#espacamento">Espaçamento</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#anti-padroes">Anti-padrões</a>
+      <a href="#aplicar">Como aplicar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================ HERO ============================================ -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="v4-mark">
+      <img src="assets/v4-logo.jpg" alt="V4 Aguiar &amp; CO" />
+      <div class="lbl">
+        V4 Aguiar &amp; CO
+        <span>Design System · Versão 1.0</span>
+      </div>
+    </div>
+    <span class="eyebrow">Guia de aplicação · 2026</span>
+    <h1>Identidade <span class="accent">visual V4</span> em qualquer ferramenta</h1>
+    <p class="lead">Este é o guia oficial de cores, tipografia e componentes da V4 Aguiar &amp; CO. Use como referência para criar apresentações, imagens, sites e qualquer material que represente a marca — em PowerPoint, Google Slides, Canva, Figma ou HTML.</p>
+    <div class="hero-meta">
+      <div class="item"><span class="lbl">Brand color</span><span class="val">#FF0037</span></div>
+      <div class="item"><span class="lbl">Display font</span><span class="val">Space Grotesk</span></div>
+      <div class="item"><span class="lbl">Body font</span><span class="val">Inter</span></div>
+      <div class="item"><span class="lbl">Mono font</span><span class="val">JetBrains Mono</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================ PRINCÍPIOS ============================================ -->
+<section id="principios">
+  <div class="container">
+    <span class="section-num">01 · Manifesto</span>
+    <h2>Princípios de design</h2>
+    <p class="lead">Cinco regras que tornam um material reconhecível como V4 — antes mesmo de aparecer o logo.</p>
+    <div class="principles">
+      <div class="principle">
+        <div class="num">01</div>
+        <h4>Branco é a base</h4>
+        <p>Fundo branco ou off-white. Espaço em branco gera autoridade. Não polua com cores ou gradientes desnecessários.</p>
+      </div>
+      <div class="principle">
+        <div class="num">02</div>
+        <h4>Vermelho é cirúrgico</h4>
+        <p>O <code>#FF0037</code> é detalhe, não decoração. Use em accent, label, número de seção, border-left, gráfico-chave. Nunca como fundo principal.</p>
+      </div>
+      <div class="principle">
+        <div class="num">03</div>
+        <h4>Números são protagonistas</h4>
+        <p>Em diagnósticos, KPIs e dashboards: o número grande, em <strong>Space Grotesk Bold</strong>, é o herói. O texto explica, mas o número convence.</p>
+      </div>
+      <div class="principle">
+        <div class="num">04</div>
+        <h4>Tipografia faz o tom</h4>
+        <p>Space Grotesk traz personalidade nos títulos. Inter dá legibilidade no corpo. JetBrains Mono adiciona autoridade técnica em labels e dados.</p>
+      </div>
+      <div class="principle">
+        <div class="num">05</div>
+        <h4>Bordas, não sombras</h4>
+        <p>Cards e blocos usam borda fina <code>1px rgba(0,0,0,.10)</code>. Sombras pesadas envelhecem o material. Borda + radius leve = limpo e moderno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ CORES ============================================ -->
+<section id="cores" class="alt">
+  <div class="container">
+    <span class="section-num">02 · Tokens</span>
+    <h2>Paleta de cores</h2>
+    <p class="lead">Clique em qualquer cor para copiar o código hex. Use sempre os tokens semânticos (success/warning/error) em vez de cores avulsas.</p>
+
+    <div class="palette-group">
+      <h4>Brand · Vermelho V4</h4>
+      <div class="palette-grid">
+        <div class="swatch copyable" data-copy="#FF0037">
+          <div class="color" style="background:#FF0037"></div>
+          <div class="meta"><div class="name">Brand</div><div class="hex">#FF0037</div><div class="var">--c-brand</div></div>
+        </div>
+        <div class="swatch copyable" data-copy="#C8002B">
+          <div class="color" style="background:#C8002B"></div>
+          <div class="meta"><div class="name">Brand Deep</div><div class="hex">#C8002B</div><div class="var">--c-brand-deep</div></div>
+        </div>
+        <div class="swatch copyable" data-copy="rgba(255,0,55,0.08)">
+          <div class="color" style="background:rgba(255,0,55,0.08); background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%), linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px;"></div>
+          <div class="meta"><div class="name">Brand Soft</div><div class="hex">rgba(255,0,55,0.08)</div><div class="var">--c-brand-soft</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <h4>Texto · Hierarquia</h4>
+      <div class="palette-grid">
+        <div class="swatch copyable" data-copy="#0A0A0A"><div class="color" style="background:#0A0A0A"></div><div class="meta"><div class="name">Text</div><div class="hex">#0A0A0A</div><div class="var">--c-text</div></div></div>
+        <div class="swatch copyable" data-copy="#3A3A42"><div class="color" style="background:#3A3A42"></div><div class="meta"><div class="name">Text 2</div><div class="hex">#3A3A42</div><div class="var">--c-text-2</div></div></div>
+        <div class="swatch copyable" data-copy="#5A5A62"><div class="color" style="background:#5A5A62"></div><div class="meta"><div class="name">Text 3</div><div class="hex">#5A5A62</div><div class="var">--c-text-3</div></div></div>
+        <div class="swatch copyable" data-copy="#8A8A92"><div class="color" style="background:#8A8A92"></div><div class="meta"><div class="name">Text 4 (muted)</div><div class="hex">#8A8A92</div><div class="var">--c-text-4</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <h4>Surfaces · Fundo</h4>
+      <div class="palette-grid">
+        <div class="swatch copyable" data-copy="#FFFFFF"><div class="color" style="background:#FFFFFF; border-bottom: 1px solid var(--c-border)"></div><div class="meta"><div class="name">BG</div><div class="hex">#FFFFFF</div><div class="var">--c-bg</div></div></div>
+        <div class="swatch copyable" data-copy="#FAFAFA"><div class="color" style="background:#FAFAFA"></div><div class="meta"><div class="name">BG Alt</div><div class="hex">#FAFAFA</div><div class="var">--c-bg-alt</div></div></div>
+        <div class="swatch copyable" data-copy="#F4F4F5"><div class="color" style="background:#F4F4F5"></div><div class="meta"><div class="name">Surface</div><div class="hex">#F4F4F5</div><div class="var">--c-surface</div></div></div>
+        <div class="swatch copyable" data-copy="#EAEAEC"><div class="color" style="background:#EAEAEC"></div><div class="meta"><div class="name">Surface 2</div><div class="hex">#EAEAEC</div><div class="var">--c-surface-2</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-group">
+      <h4>Semântico · Status</h4>
+      <div class="palette-grid">
+        <div class="swatch copyable" data-copy="#16A34A"><div class="color" style="background:#16A34A"></div><div class="meta"><div class="name">Success</div><div class="hex">#16A34A</div><div class="var">--c-success</div></div></div>
+        <div class="swatch copyable" data-copy="#D97706"><div class="color" style="background:#D97706"></div><div class="meta"><div class="name">Warning</div><div class="hex">#D97706</div><div class="var">--c-warning</div></div></div>
+        <div class="swatch copyable" data-copy="#DC2626"><div class="color" style="background:#DC2626"></div><div class="meta"><div class="name">Error</div><div class="hex">#DC2626</div><div class="var">--c-error</div></div></div>
+        <div class="swatch copyable" data-copy="#2563EB"><div class="color" style="background:#2563EB"></div><div class="meta"><div class="name">Info</div><div class="hex">#2563EB</div><div class="var">--c-info</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ TIPOGRAFIA ============================================ -->
+<section id="tipografia">
+  <div class="container">
+    <span class="section-num">03 · Tipografia</span>
+    <h2>Famílias e hierarquia</h2>
+    <p class="lead">Três fontes do Google Fonts (todas gratuitas, todas suportadas no Google Slides nativamente). Cada uma tem um papel claro.</p>
+
+    <div class="font-card">
+      <div class="meta">DISPLAY · TÍTULOS · NÚMEROS-HERÓI</div>
+      <h3 class="name">Space Grotesk</h3>
+      <div class="preview type-display">Faturamento R$ 160.503</div>
+      <div class="alpha type-display">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+
+    <div class="font-card">
+      <div class="meta">BODY · TEXTO CORRIDO · LABELS</div>
+      <h3 class="name">Inter</h3>
+      <div class="preview type-body">A queda de 19,7% em abril teve três causas distintas — todas reversíveis nas próximas duas semanas.</div>
+      <div class="alpha type-body">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+
+    <div class="font-card">
+      <div class="meta">MONO · DADOS · CÓDIGO · LABELS TÉCNICOS</div>
+      <h3 class="name">JetBrains Mono</h3>
+      <div class="preview type-mono">ROAS 58,5x · CPC R$ 0,28 · CTR 15,05%</div>
+      <div class="alpha type-mono">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+
+    <h3 style="margin-top: 56px">Hierarquia tipográfica</h3>
+    <div class="type-row">
+      <div class="label">H1 / HERO<span class="size">60px · Bold · -2% letter-spacing</span></div>
+      <div class="type-display" style="font-size: 56px; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em;">Diagnóstico</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H2 / SEÇÃO<span class="size">42px · Bold · -2% letter-spacing</span></div>
+      <div class="type-display" style="font-size: 38px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em;">Resumo Executivo</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H3 / TÍTULO<span class="size">28px · Bold</span></div>
+      <div class="type-display" style="font-size: 26px; font-weight: 700;">Performance das Campanhas</div>
+    </div>
+    <div class="type-row">
+      <div class="label">H4 / SUBTÍTULO<span class="size">19px · Bold</span></div>
+      <div class="type-display" style="font-size: 19px; font-weight: 700;">FRIOS · Catálogo Dinâmico</div>
+    </div>
+    <div class="type-row">
+      <div class="label">LEAD / DESTAQUE<span class="size">19px · Inter · 1.55 line-height</span></div>
+      <div class="type-body" style="font-size: 19px; line-height: 1.55; color: var(--c-text);">Queda de 19,7% no faturamento — 3 causas identificadas neste relatório.</div>
+    </div>
+    <div class="type-row">
+      <div class="label">BODY<span class="size">16px · Inter · 1.6 line-height</span></div>
+      <div class="type-body" style="font-size: 16px; color: var(--c-text-2); line-height: 1.6;">A campanha FRIOS Catálogo Dinâmico foi a única que cresceu em abril, com ROAS de 58,5x — o melhor desempenho da conta.</div>
+    </div>
+    <div class="type-row">
+      <div class="label">LABEL · MONO<span class="size">11px · JetBrains Mono · 18% letter-spacing · Uppercase</span></div>
+      <div class="type-mono" style="font-size: 11px; letter-spacing: 0.18em; color: var(--c-brand); font-weight: 600; text-transform: uppercase;">DIAGNÓSTICO · MARÇO → ABRIL 2026</div>
+    </div>
+    <div class="type-row">
+      <div class="label">DATA · MONO<span class="size">14px · JetBrains Mono · números fixos</span></div>
+      <div class="type-mono" style="font-size: 14px; color: var(--c-text);">ROAS 58,5x · R$ 48.314 · CTR 15,05%</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ ESPAÇAMENTO ============================================ -->
+<section id="espacamento" class="alt">
+  <div class="container">
+    <span class="section-num">04 · Layout</span>
+    <h2>Escala de espaçamento</h2>
+    <p class="lead">Use múltiplos de 8px. Espaço entre seções, padding interno de cards, gap entre KPIs — tudo deriva dessa escala.</p>
+    <div class="spacing-grid">
+      <div class="spacing-cell"><div class="bar" style="width:8px"></div><div class="name">XS</div><div class="px">8px · 6pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:16px"></div><div class="name">SM</div><div class="px">16px · 12pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:24px"></div><div class="name">MD</div><div class="px">24px · 18pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:32px"></div><div class="name">LG</div><div class="px">32px · 24pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:48px"></div><div class="name">XL</div><div class="px">48px · 36pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:64px"></div><div class="name">2XL</div><div class="px">64px · 48pt</div></div>
+      <div class="spacing-cell"><div class="bar" style="width:80px"></div><div class="name">SECTION</div><div class="px">80px · 60pt</div></div>
+    </div>
+    <p style="margin-top: 28px; font-size: 14px; color: var(--c-text-3);"><strong>Border radius padrão:</strong> 8px (cards), 12px (cards grandes), 100px (badges/pills). <strong>Border:</strong> sempre <code>1px solid rgba(0,0,0,0.10)</code>.</p>
+  </div>
+</section>
+
+<!-- ============================================ COMPONENTES ============================================ -->
+<section id="componentes">
+  <div class="container">
+    <span class="section-num">05 · Biblioteca</span>
+    <h2>Componentes</h2>
+    <p class="lead">Cada componente tem um exemplo ao vivo (como deve ficar) e três specs lado a lado: <strong>PowerPoint/Slides</strong> (em pontos · pt), <strong>Imagem/Canva/Figma</strong> (em px), <strong>HTML/CSS</strong> (código pronto).</p>
+
+    <!-- Top Nav -->
+    <div class="component">
+      <div class="component-header"><h4>Top Nav (rodapé/cabeçalho da apresentação)</h4><span class="tag">Apresentação</span></div>
+      <div class="component-preview">
+        <div class="demo-topnav">
+          <img src="assets/v4-logo.jpg" alt="V4" />
+          <span class="brand">V4 Aguiar &amp; CO · Diagnóstico [Cliente]</span>
+          <span class="nav-num">02 / 11</span>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Altura: <strong>30pt</strong></li>
+            <li>Logo V4: <strong>20×20pt</strong>, radius 4pt</li>
+            <li>Texto: Space Grotesk Bold <strong>10pt</strong></li>
+            <li>Numerador: JetBrains Mono <strong>9pt</strong>, alinhado à direita</li>
+            <li>Borda inferior: <strong>0.5pt</strong> #E2E2E5</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Altura: <strong>40px</strong></li>
+            <li>Logo: <strong>26×26px</strong>, radius 5px</li>
+            <li>Texto: Space Grotesk Bold <strong>13px</strong></li>
+            <li>Numerador: Mono <strong>11px</strong>, gap 10px</li>
+            <li>Borda: <strong>1px</strong> #E2E2E5</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li>Container <code>position: sticky</code></li>
+            <li><code>backdrop-filter: blur(10px)</code></li>
+            <li>Padding <strong>12px 16px</strong></li>
+            <li>Display flex, gap <strong>14px</strong></li>
+            <li>BG <code>rgba(255,255,255,.95)</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="component">
+      <div class="component-header"><h4>Hero / Capa</h4><span class="tag">Apresentação · Site</span></div>
+      <div class="component-preview">
+        <div class="demo-hero">
+          <span class="eyebrow">DIAGNÓSTICO · MARÇO → ABRIL 2026</span>
+          <h2>Dog in Box</h2>
+          <p>Queda de 19,7% no faturamento — 3 causas identificadas</p>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Faixa lateral vermelha: <strong>14pt</strong> de largura</li>
+            <li>Logo V4: <strong>56×56pt</strong></li>
+            <li>Eyebrow: Mono <strong>10pt</strong>, vermelho V4</li>
+            <li>Título: Space Grotesk Bold <strong>72pt</strong>, line-height 1.0</li>
+            <li>Subtítulo: Space Grotesk Regular <strong>20pt</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Frame 1920×1080 (16:9)</li>
+            <li>Faixa lateral: <strong>6px</strong> #FF0037</li>
+            <li>Logo: <strong>56×56px</strong>, radius 12px</li>
+            <li>Título: Space Grotesk <strong>96px</strong>, weight 700</li>
+            <li>Padding lateral: <strong>80px</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>background: linear-gradient(180deg, #fff, #FAFAFA)</code></li>
+            <li><code>::before</code> com 6px width #FF0037</li>
+            <li>Padding <strong>100px 0 80px</strong></li>
+            <li>H1 <code>clamp(36px, 5vw, 60px)</code></li>
+            <li>Eyebrow letter-spacing <strong>0.18em</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="component">
+      <div class="component-header"><h4>Section Header (numerado)</h4><span class="tag">Apresentação · Site</span></div>
+      <div class="component-preview">
+        <div class="demo-sectionhdr">
+          <div class="num">01 · RESUMO EXECUTIVO</div>
+          <div class="title">Resumo Executivo</div>
+          <div class="sub">Visão geral do período · Março × Abril 2026</div>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Numerador: Mono <strong>10pt</strong> vermelho, letter-spacing 20%</li>
+            <li>Título: Space Grotesk <strong>28pt</strong> Bold</li>
+            <li>Subtítulo: Inter <strong>12pt</strong> #5A5A62</li>
+            <li>Espaço entre num e título: <strong>4pt</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Numerador: Mono <strong>13px</strong>, weight 600</li>
+            <li>Título: Space Grotesk <strong>42px</strong>, weight 700</li>
+            <li>Subtítulo: Inter <strong>16px</strong>, color #5A5A62</li>
+            <li>Letter-spacing num: <strong>0.18em</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>.section-num</code> color brand</li>
+            <li><code>letter-spacing: 0.1em</code></li>
+            <li>Margin-bottom títulos <strong>32px</strong></li>
+            <li>Subtítulo line-height <strong>1.5</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Card -->
+    <div class="component">
+      <div class="component-header"><h4>KPI Card</h4><span class="tag">Dados · Diagnóstico</span></div>
+      <div class="component-preview">
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi accent">
+            <div class="lbl">FATURAMENTO ABRIL</div>
+            <div class="val">R$ 160.503</div>
+            <div class="sub down">▼ 19,7% vs março</div>
+          </div>
+          <div class="demo-kpi accent">
+            <div class="lbl">PEDIDOS ABRIL</div>
+            <div class="val">875</div>
+            <div class="sub down">▼ 22,2% vs março</div>
+          </div>
+          <div class="demo-kpi">
+            <div class="lbl">TICKET MÉDIO</div>
+            <div class="val">R$ 183,43</div>
+            <div class="sub up">▲ +3,2% vs março</div>
+          </div>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Card: largura livre, altura <strong>100pt</strong></li>
+            <li>Borda: <strong>0.75pt</strong> #E2E2E5</li>
+            <li>Accent: borda esquerda <strong>4pt</strong> vermelha</li>
+            <li>Label: Mono <strong>8pt</strong> #5A5A62</li>
+            <li>Valor: Space Grotesk <strong>22pt</strong> Bold</li>
+            <li>Sub: Inter <strong>9pt</strong> · verde/vermelho</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Frame: <strong>280×140px</strong></li>
+            <li>Padding interno: <strong>18px</strong></li>
+            <li>Border radius: <strong>8px</strong></li>
+            <li>Accent left: <strong>4px</strong> #FF0037</li>
+            <li>Valor: Space Grotesk <strong>26px</strong> 700</li>
+            <li>Gap label→valor: <strong>8px</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>border: 1px solid var(--c-border)</code></li>
+            <li><code>border-radius: 8px</code></li>
+            <li><code>::before</code> 4px brand quando accent</li>
+            <li>Label uppercase letter-spacing 0.15em</li>
+            <li>Sub: <code>.up { color: success }</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bullet Card -->
+    <div class="component">
+      <div class="component-header"><h4>Bullet Card (recomendações por categoria)</h4><span class="tag">Diagnóstico</span></div>
+      <div class="component-preview">
+        <div class="demo-bullet">
+          <div class="ttl">FRIOS · Catálogo Dinâmico</div>
+          <div class="sub-ttl">ROAS 58,5x · MELHOR CAMPANHA</div>
+          <ul>
+            <li>Escalar orçamento de R$ 826 → R$ 1.800 imediatamente</li>
+            <li>Adicionar novos produtos ao catálogo</li>
+            <li>Testar Lookalike dos compradores recentes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Card: borda <strong>0.75pt</strong> + radius <strong>6pt</strong></li>
+            <li>Accent left: <strong>5pt</strong> (cor varia por status)</li>
+            <li>Título: Space Grotesk <strong>14pt</strong> Bold</li>
+            <li>Sub: Mono <strong>8pt</strong>, cor do accent</li>
+            <li>Bullets: Inter <strong>10pt</strong>, gap 4pt</li>
+            <li>Bullet char: <strong>→</strong> + 2 espaços</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Card: <strong>540×280px</strong> aprox</li>
+            <li>Padding: <strong>22px 24px</strong></li>
+            <li>Accent left: <strong>4px</strong> · radius interno</li>
+            <li>Título: Space Grotesk <strong>17px</strong> 700</li>
+            <li>Sub: Mono <strong>11px</strong>, weight 600</li>
+            <li>Bullets line-height: <strong>1.5</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>position: relative</code></li>
+            <li><code>::before</code> com 4px width</li>
+            <li><code>ul li::before { content: '→  ' }</code></li>
+            <li>Sub-ttl com letter-spacing <strong>0.12em</strong></li>
+            <li>Cor do accent: success/warning/error/info</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Box -->
+    <div class="component">
+      <div class="component-header"><h4>Alert Box (destaque com border-left)</h4><span class="tag">Texto · Aviso</span></div>
+      <div class="component-preview">
+        <div class="demo-alert" style="margin-bottom: 12px"><strong>⚠</strong> Queda de 19,7% no faturamento e 22,2% nos pedidos em abril — 3 causas identificadas neste relatório.</div>
+        <div class="demo-alert success" style="margin-bottom: 12px"><strong>✅</strong> CPC de R$ 0,28 é excelente para e-commerce pet. Avaliar aumento de orçamento.</div>
+        <div class="demo-alert info"><strong>💡</strong> FRIOS Catálogo Dinâmico foi a única campanha que cresceu — ROAS 58,5x é o melhor da conta.</div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Fundo: <strong>#F4F4F5</strong></li>
+            <li>Border-left: <strong>4pt</strong> (vermelho ou semântico)</li>
+            <li>Padding: <strong>14pt 22pt</strong></li>
+            <li>Texto: Inter <strong>11pt</strong> #0A0A0A</li>
+            <li>Cantos: arredondados só à direita (radius 8pt)</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Fundo: <strong>#F4F4F5</strong></li>
+            <li>Border-left: <strong>4px</strong></li>
+            <li>Padding: <strong>16px 22px</strong></li>
+            <li>Texto: Inter <strong>14px</strong>, line-height 1.5</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>border-left: 4px solid var(--c-brand)</code></li>
+            <li><code>border-radius: 0 8px 8px 0</code></li>
+            <li><code>background: var(--c-surface)</code></li>
+            <li>Variantes: <code>.warning</code>, <code>.success</code>, <code>.info</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="component">
+      <div class="component-header"><h4>Tabela de dados</h4><span class="tag">Diagnóstico · Dashboard</span></div>
+      <div class="component-preview">
+        <table class="demo-table">
+          <thead>
+            <tr><th>CAMPANHA</th><th>COMPRAS ABR</th><th>ROAS ABR</th><th>VARIAÇÃO</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>FRIOS · Catálogo Dinâmico ⭐</strong></td><td class="num">277</td><td class="num">58,5x</td><td class="num up">▲ +16%</td></tr>
+            <tr><td>FRIOS · Interesses + Aberto</td><td class="num">182</td><td class="num">25,8x</td><td class="num down">▼ -21%</td></tr>
+            <tr><td>QUENTE · Envolvimentos</td><td class="num">86</td><td class="num">28,0x</td><td class="num down">▼ -18%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Header: fundo <strong>#0A0A0A</strong>, texto branco</li>
+            <li>Header text: Mono <strong>8pt</strong> uppercase</li>
+            <li>Linhas zebradas: alterna #FFF e <strong>#FAFAFA</strong></li>
+            <li>Texto célula: Inter <strong>10pt</strong></li>
+            <li>Números: Mono <strong>9.5pt</strong></li>
+            <li>Border-bottom: <strong>0.5pt</strong> #E2E2E5</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Header altura: <strong>44px</strong>, padding 12px 14px</li>
+            <li>Linhas: altura <strong>40px</strong></li>
+            <li>Header text: Mono <strong>10px</strong> uppercase</li>
+            <li>Cell text: Inter <strong>13px</strong></li>
+            <li>Variação ↑↓ em verde/vermelho semântico</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>border-collapse: collapse</code></li>
+            <li><code>tr:nth-child(even)</code> bg-alt</li>
+            <li><code>th</code> letter-spacing 0.1em</li>
+            <li><code>.up { color: success }</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="component">
+      <div class="component-header"><h4>Badge de prioridade / status</h4><span class="tag">Plano · Tabela</span></div>
+      <div class="component-preview">
+        <div class="demo-badge-row">
+          <span class="demo-badge alta">ALTA</span>
+          <span class="demo-badge media">MÉDIA</span>
+          <span class="demo-badge baixa">BAIXA</span>
+          <span class="demo-badge alta">URGENTE</span>
+          <span class="demo-badge baixa">PAUSADA</span>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Pill: radius <strong>100pt</strong> (full)</li>
+            <li>Padding: <strong>4pt 12pt</strong></li>
+            <li>Texto: Mono <strong>8pt</strong> Bold uppercase</li>
+            <li>Letter-spacing: <strong>12%</strong></li>
+            <li>BG soft + texto cor saturada</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Pill: radius <strong>100px</strong></li>
+            <li>Padding: <strong>5px 12px</strong></li>
+            <li>Mono <strong>11px</strong> Bold uppercase</li>
+            <li>Letter-spacing: <strong>0.12em</strong></li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>.alta { bg: error-soft; color: error }</code></li>
+            <li><code>.media { bg: warning-soft; color: warning }</code></li>
+            <li><code>.baixa { bg: surface; color: text-3 }</code></li>
+            <li>Border-radius <code>100px</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status grid -->
+    <div class="component">
+      <div class="component-header"><h4>Status Grid (4 categorias coloridas)</h4><span class="tag">Pontos de atenção</span></div>
+      <div class="component-preview">
+        <div class="demo-status-grid">
+          <div class="demo-status s1">
+            <div class="icon">📱</div>
+            <div class="ttl">TikTok</div>
+            <div class="sub">PRÓXIMO CANAL</div>
+          </div>
+          <div class="demo-status s2">
+            <div class="icon">🗺</div>
+            <div class="ttl">Expansão</div>
+            <div class="sub">EM ANDAMENTO</div>
+          </div>
+          <div class="demo-status s3">
+            <div class="icon">❌</div>
+            <div class="ttl">Cancelamento</div>
+            <div class="sub">EM RISCO</div>
+          </div>
+          <div class="demo-status s4">
+            <div class="icon">✅</div>
+            <div class="ttl">Criativos</div>
+            <div class="sub">MANTER</div>
+          </div>
+        </div>
+      </div>
+      <div class="component-specs">
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🅿</span>PowerPoint / Slides</div>
+          <ul>
+            <li>Card: padding <strong>14pt</strong>, radius 6pt</li>
+            <li>Top accent: <strong>5pt</strong> de altura, cor do status</li>
+            <li>Ícone: <strong>22pt</strong> emoji ou ícone V4</li>
+            <li>Título: Space Grotesk <strong>14pt</strong> Bold</li>
+            <li>Cores: info / warning / error / success</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">🎨</span>Canva / Figma</div>
+          <ul>
+            <li>Frame: <strong>240×280px</strong></li>
+            <li>Top bar accent: <strong>4px</strong></li>
+            <li>Padding: <strong>18px</strong></li>
+            <li>Título: <strong>15px</strong> · Sub: Mono 9px</li>
+          </ul>
+        </div>
+        <div class="spec-block">
+          <div class="spec-label"><span class="icon">{ }</span>HTML / CSS</div>
+          <ul>
+            <li><code>::before</code> com height <strong>4px</strong>, top: 0</li>
+            <li>Variantes <code>.s1</code> info, <code>.s2</code> warning, <code>.s3</code> error, <code>.s4</code> success</li>
+            <li>Grid 4 cols com gap 12px</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ ANTI-PADRÕES ============================================ -->
+<section id="anti-padroes" class="alt">
+  <div class="container">
+    <span class="section-num">06 · Disciplina</span>
+    <h2>Anti-padrões — o que NÃO fazer</h2>
+    <p class="lead">Esses são os erros mais comuns que descaracterizam a marca V4. Se você se pegar fazendo qualquer um desses, pare e revise.</p>
+    <div class="anti-grid">
+      <div class="anti bad">
+        <div class="label">❌ Não faça</div>
+        <ul>
+          <li>Fundo vermelho ocupando o slide inteiro</li>
+          <li>Mais de 2 cores de destaque por slide</li>
+          <li>Sombras pesadas em cards (drop-shadow exagerado)</li>
+          <li>Gradientes coloridos como fundo principal</li>
+          <li>Fontes serifadas (Times, Georgia) em qualquer lugar</li>
+          <li>Comic Sans, Papyrus ou qualquer fonte decorativa</li>
+          <li>Emojis aleatórios decorando títulos</li>
+          <li>Bullets com bolinhas (•) — usar setas (→)</li>
+          <li>Bordas grossas (≥ 2px) em cards</li>
+          <li>Cores fora da paleta (verde-limão, rosa-bebê, etc.)</li>
+        </ul>
+      </div>
+      <div class="anti good">
+        <div class="label">✅ Faça</div>
+        <ul>
+          <li>Fundo branco ou off-white sempre</li>
+          <li>Vermelho V4 como detalhe (label, border-left, números-chave)</li>
+          <li>Borda fina <code>1px</code> + radius leve em cards</li>
+          <li>Verde, laranja ou azul só com função (success/warning/info)</li>
+          <li>Space Grotesk em títulos · Inter no corpo · Mono em dados</li>
+          <li>Números grandes em Space Grotesk Bold</li>
+          <li>Setas <strong>→</strong> em bullets de ações/recomendações</li>
+          <li>Section number em mono (<code>01 · TÍTULO</code>)</li>
+          <li>Espaço em branco generoso entre seções</li>
+          <li>Letter-spacing positivo (0.1–0.2em) em labels uppercase</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ COMO APLICAR ============================================ -->
+<section id="aplicar">
+  <div class="container">
+    <span class="section-num">07 · Workflow</span>
+    <h2>Como aplicar em cada ferramenta</h2>
+    <p class="lead">Passo a passo prático para reproduzir o sistema em PowerPoint, Google Slides, Canva, Figma ou direto em HTML.</p>
+
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <h4><span class="ico">🅿</span>PowerPoint</h4>
+        <div class="stack">DESKTOP · MICROSOFT 365</div>
+        <ol>
+          <li>Instale as fontes localmente: <strong>Space Grotesk</strong>, <strong>Inter</strong>, <strong>JetBrains Mono</strong> (todas grátis no Google Fonts → baixar TTF → clique-duplo → instalar).</li>
+          <li>Configure as cores em <strong>Design → Variantes → Cores → Personalizar Cores</strong> com os hex desta paleta.</li>
+          <li>Use slide master (<strong>Exibir → Slide Mestre</strong>) com background <code>#FFFFFF</code> e top nav padrão.</li>
+          <li>Para cada componente, use os specs em <strong>pt</strong> (PowerPoint usa pontos, não pixels).</li>
+          <li>Salve o template como <code>.potx</code> para reutilizar.</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h4><span class="ico">🅖</span>Google Slides</h4>
+        <div class="stack">WEB · GOOGLE WORKSPACE</div>
+        <ol>
+          <li>As 3 fontes (Space Grotesk, Inter, JetBrains Mono) já estão disponíveis nativamente — basta selecionar em <strong>Fonte → Mais fontes</strong> e adicionar.</li>
+          <li>Defina o tema em <strong>Slide → Editar tema</strong>: cor de destaque <code>#FF0037</code>, fundo <code>#FFFFFF</code>.</li>
+          <li>Importe um pptx pronto da V4 e ajuste — todos os componentes deste guia funcionam em Slides.</li>
+          <li>Use os specs em <strong>pt</strong> (Slides usa a mesma medida do PowerPoint).</li>
+          <li>Para tabelas, use <strong>Inserir → Tabela</strong> e estilize manualmente conforme spec.</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h4><span class="ico">🎨</span>Canva</h4>
+        <div class="stack">WEB · APRESENTAÇÕES E POSTS</div>
+        <ol>
+          <li>Crie design com tamanho <strong>1920×1080px</strong> (apresentação 16:9) ou <strong>1080×1080px</strong> (post quadrado).</li>
+          <li>Em <strong>Marca → Kit de marca</strong>, adicione as cores hex desta paleta e faça upload das fontes (Pro) ou use fontes equivalentes do Canva.</li>
+          <li>Para cada componente, use os specs em <strong>px</strong>.</li>
+          <li>Para o efeito border-left vermelho: crie um retângulo de 4px de largura colado à esquerda do card.</li>
+          <li>Salve como template no kit da marca para reuso.</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h4><span class="ico">F</span>Figma</h4>
+        <div class="stack">WEB / DESKTOP · DESIGN PROFISSIONAL</div>
+        <ol>
+          <li>Crie um arquivo com <strong>Local Variables</strong> contendo todos os tokens de cor, tipografia e espaçamento desta paleta.</li>
+          <li>Crie <strong>Components</strong> reutilizáveis para KPI Card, Bullet Card, Alert, Table Row, Badge.</li>
+          <li>Use <strong>Auto Layout</strong> em todos os cards (padding 18-22px, gap 8-16px).</li>
+          <li>Publique como <strong>Library</strong> para o time externo usar.</li>
+          <li>Para exportar para PowerPoint: use plugin <strong>Pitch</strong> ou <strong>Slidedeck</strong>.</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h4><span class="ico">{ }</span>HTML / CSS</h4>
+        <div class="stack">WEB · APRESENTAÇÕES INTERATIVAS</div>
+        <ol>
+          <li>Importe as 3 fontes via Google Fonts no <code>&lt;head&gt;</code>.</li>
+          <li>Cole o bloco <code>:root</code> deste guia (tokens de cor, fonte e espaçamento) no seu CSS.</li>
+          <li>Copie os componentes diretamente do código-fonte deste arquivo (botão direito → Inspecionar).</li>
+          <li>Para apresentações interativas: use <strong>Reveal.js</strong> ou monte slides como <code>section</code>.</li>
+          <li>Para gerar PDF: use <strong>Chrome → Imprimir → Salvar como PDF</strong>.</li>
+        </ol>
+      </div>
+
+      <div class="tool-card">
+        <h4><span class="ico">📐</span>Adobe Illustrator / Photoshop</h4>
+        <div class="stack">DESKTOP · IMAGENS DE ALTA QUALIDADE</div>
+        <ol>
+          <li>Crie o arquivo em <strong>RGB</strong> (web) ou <strong>CMYK</strong> (impressão — converta o vermelho com cuidado, pode mudar a saturação).</li>
+          <li>Configure Swatches com os hex da paleta. Salve como <code>.ase</code> e compartilhe.</li>
+          <li>Use os specs em <strong>px</strong> (Photoshop) ou <strong>pt</strong> (Illustrator).</li>
+          <li>Sempre exporte em <strong>PNG-24</strong> (web) ou <strong>PDF/X</strong> (impressão).</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ FOOTER ============================================ -->
+<footer>
+  <div class="container">
+    <div class="v4-mark"><img src="assets/v4-logo.jpg" alt="V4" /></div>
+    <p style="font-family: var(--f-display); font-weight: 700; color: var(--c-text); font-size: 16px; margin-bottom: 8px;">Design System V4 Aguiar &amp; CO</p>
+    <p>Guia oficial de aplicação · Versão 1.0 · 2026</p>
+    <p style="margin-top: 24px; font-size: 12px;">Em caso de dúvidas, fale com o time da V4.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Copiado!</div>
+
+<script>
+  // copy-to-clipboard nas swatches
+  document.querySelectorAll('.copyable').forEach(el => {
+    el.addEventListener('click', () => {
+      const value = el.dataset.copy || el.textContent;
+      navigator.clipboard.writeText(value).then(() => {
+        const t = document.getElementById('toast');
+        t.textContent = `Copiado: ${value}`;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 1600);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

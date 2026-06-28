@@ -1,0 +1,29 @@
+name: Auditoria de SEO e GEO
+code: seo-geo
+description: "Squad que conduz a auditoria de busca orgânica (SEO) e de otimização para IA generativa (GEO). O analista de SEO cobre o técnico, o on-page e o conteúdo/autoridade; o analista de GEO cobre a presença em respostas de IA — a parte nova de 2026. As skills por ponto fazem o trabalho e preenchem a planilha-gabarito."
+icon: "🔎"
+version: "1.0.0"
+
+agents:
+  - agents/analista-seo.agent.md
+  - agents/analista-geo.agent.md
+
+skills:
+  - seogeo-coletar
+  - seogeo-tecnico
+  - seogeo-onpage
+  - seogeo-geo
+  - seogeo-preencher
+
+gabarito: "planilhas/Auditoria de SEO e GEO - V4.xlsx"
+
+como_funciona: |
+  1. O analista de SEO lê o dossiê (auditorias/<cliente>/00-dossie.md) e garante os dados via seogeo-coletar
+     (URL do site, acesso a Google Search Console e GA4 quando houver).
+  2. O analista de SEO audita as seções 1.1 (técnico), 1.2 (on-page) e 1.3 (conteúdo/autoridade), além da
+     1.5 (mensuração), usando as skills seogeo-tecnico e seogeo-onpage.
+  3. O analista de GEO audita a seção 1.4 (GEO) com a skill seogeo-geo, marcando como "(validar)" os
+     critérios emergentes de 2026 (presença em respostas de IA, llms.txt).
+  4. A skill seogeo-preencher consolida os achados na planilha (Status na coluna G, Observações na coluna H)
+     e em achados/seo-geo.md.
+  5. O analista de SEO sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).

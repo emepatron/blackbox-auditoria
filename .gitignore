@@ -1,0 +1,17 @@
+# Credenciais — NUNCA versionar (repo público)
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+
+# Dados e auditorias de clientes ficam locais (não sobem pro template)
+auditorias/*
+!auditorias/.gitkeep
+!auditorias/_EXEMPLO/
+
+# Lixo de sistema
+.DS_Store
+__pycache__/
+*.pyc
+.venv/

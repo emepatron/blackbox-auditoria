@@ -1,11 +1,11 @@
 # Blackbox de Auditoria — Arquitetura
 
-Template standalone de auditoria da V4. O time copia a pasta, dá o nome do cliente e conduz a auditoria com IA (Claude Code ou Codex). Autossuficiente: nada depende de servidor, conta ou serviço externo.
+Template standalone de auditoria da V4. O time copia a pasta, dá o nome do cliente e conduz a auditoria com IA (Claude Code, Codex, Antigravity ou Gemini). Autossuficiente: nada depende de servidor, conta ou serviço externo.
 
 ## Princípios
 
 1. **Standalone** — tudo vive dentro da pasta. Baixa, extrai, roda.
-2. **Cross-IA** — toda skill funciona em Claude Code E Codex (markdown + duplo-write em `.claude/skills/` e `.agents/skills/`).
+2. **Cross-IA** — toda skill funciona em Claude Code, Codex, Antigravity e Gemini (markdown + duplo-write em `.claude/skills/` e `.agents/skills/`; este último é o diretório cross-runtime lido por Codex, Gemini e Antigravity). Instruções espelhadas em `CLAUDE.md`, `AGENTS.md` e `GEMINI.md`.
 3. **A planilha é o gabarito** — cada frente tem um checklist (Fase 1) que guia e recebe os achados. Funciona com ou sem IA.
 4. **O caminho de dados é negociado** — clientes têm plataformas e integrações diferentes. O onboarding descobre, caso a caso, COMO obter os dados (MCP, API ou export manual).
 5. **Pergunta antes de auditar** — muito contexto primeiro, auditoria depois.
@@ -33,11 +33,11 @@ iniciar (onboarding)
 
 ```
 blackbox-auditoria/
-  README.md                  Como o time usa (passo a passo)
-  CLAUDE.md / AGENTS.md       Instruções de operação (idênticos)
-  SPEC.md                     Este arquivo
-  .claude/skills/             Skills (Claude Code)
-  .agents/skills/             Skills espelhadas (Codex) — duplo-write
+  README.md                       Como o time usa (passo a passo)
+  CLAUDE.md / AGENTS.md / GEMINI.md  Instruções de operação (idênticos)
+  SPEC.md                          Este arquivo
+  .claude/skills/                  Skills (Claude Code)
+  .agents/skills/                  Skills espelhadas (Codex, Gemini, Antigravity) — duplo-write
   squads/<frente>/            Squad por frente (squad.yaml + agents/)
   planilhas/                  7 checklists-gabarito (Fase 1)
   design-system-v4/           Identidade visual V4 (relatórios HTML)

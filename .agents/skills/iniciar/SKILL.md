@@ -90,5 +90,5 @@ Acione a skill **`relatorio`**:
 - Cruze sempre o achado com o **benchmark** da planilha antes de classificar o status.
 - Registre achados em `auditorias/<cliente>/achados/<frente>.md` conforme avança.
 
-## Funciona em Claude Code e Codex
-Esta skill é markdown puro e está espelhada em `.claude/skills/` e `.agents/skills/`. Não depende de ferramenta específica de nenhuma IA.
+## Funciona em Claude Code, Codex, Antigravity e Gemini
+Esta skill é markdown puro e está espelhada em `.claude/skills/` e `.agents/skills/` (diretório cross-runtime lido por Codex, Gemini e Antigravity). No Antigravity, carregue-a lendo este `SKILL.md` com `view_file` (`IsSkillFile: true`). Não depende de ferramenta específica de nenhuma IA.

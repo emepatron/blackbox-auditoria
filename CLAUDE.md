@@ -1,9 +1,16 @@
 # Blackbox de Auditoria — Operação
 
-Este é um template de auditoria da V4. Quando aberto numa cópia para um cliente, você conduz a auditoria. Lido por Claude Code; o conteúdo idêntico está em `AGENTS.md` (Codex e outras IAs).
+Este é um template de auditoria da V4. Quando aberto numa cópia para um cliente, você conduz a auditoria. Lido por Claude Code; o conteúdo idêntico está em `AGENTS.md` (Codex, Antigravity e outras IAs) e `GEMINI.md` (Gemini CLI).
 
 ## Regra primeira
 Ao iniciar uma auditoria nova (usuário diz "iniciar auditoria", "auditar cliente X", ou é a primeira vez na pasta), **use a skill `iniciar`**. Ela é a porta de entrada e controla todo o fluxo.
+
+## Como começar (por IA)
+As skills vivem em `.claude/skills/` (Claude Code) e `.agents/skills/` (Codex, Gemini e Antigravity — diretório cross-runtime). O ponto de entrada é sempre a skill **`iniciar`**:
+- **Claude Code:** invoque a skill `iniciar` (ou digite `/iniciar`).
+- **Codex:** as skills carregam nativamente; comece pela `iniciar`.
+- **Antigravity (`agy`):** ele lista as skills no início da sessão, mas não tem `activate_skill`. Para começar, abra `.agents/skills/iniciar/SKILL.md` com `view_file` (`IsSkillFile: true`) e siga as instruções. As demais skills carregam do mesmo jeito quando a descrição casar com o passo.
+- **Gemini CLI:** as skills estão em `.agents/skills/`; ative a `iniciar`.
 
 ## Princípios inegociáveis
 - **Pergunte muito antes de auditar.** Contexto primeiro, auditoria depois. Uma auditoria rasa nasce de pouco contexto.
@@ -11,7 +18,7 @@ Ao iniciar uma auditoria nova (usuário diz "iniciar auditoria", "auditar client
 - **Negocie o caminho de dados.** Cada cliente tem plataformas diferentes: tente MCP → API → export manual (CSV). A auditoria acontece de qualquer jeito.
 - **Não invente dados.** Sem informação, pergunte ou registre como lacuna.
 - **Credenciais:** só via `.env` local. Nunca no chat, nunca versionado. Este repo é público.
-- **Cross-IA:** toda skill funciona em Claude Code e Codex. Ao criar/editar skill, mantenha idêntica em `.claude/skills/` E `.agents/skills/`.
+- **Cross-IA:** toda skill funciona em Claude Code, Codex, Antigravity e Gemini. Ao criar/editar skill, mantenha idêntica em `.claude/skills/` E `.agents/skills/` (este último é o diretório cross-runtime que Codex, Gemini e Antigravity leem).
 
 ## Frentes e onde ficam
 | Frente | Squad | Planilha |

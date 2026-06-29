@@ -18,7 +18,7 @@ Funciona para 7 frentes: **Campanhas (tráfego pago), CRM, Landing Page, Site, G
 Renomeie a pasta para algo como `auditoria-nome-do-cliente`. Cada cliente = uma cópia.
 
 ### 3. Abra com a IA
-Abra a pasta no **Claude Code** ou no **Codex** (o que você usar).
+Abra a pasta no **Claude Code**, **Codex**, **Antigravity** ou **Gemini** (o que você usar).
 
 ### 4. Comece
 Digite:
@@ -57,8 +57,8 @@ Tudo que a IA produzir fica em `auditorias/<nome-do-cliente>/`:
 **Não tenho integração com Meta/Google. Consigo auditar?**
 Sim. A IA te ensina a exportar o CSV do gerenciador e você entrega — a auditoria acontece do mesmo jeito.
 
-**Funciona no Codex e no Claude Code?**
-Sim, os dois. As habilidades estão escritas para ambos.
+**Funciona em qual IA?**
+Claude Code, Codex, Antigravity e Gemini — as habilidades estão escritas para todas. No Antigravity, abra a pasta e a IA já lista as habilidades; comece pela `iniciar`. Em qualquer uma, o ponto de partida é sempre `iniciar`.
 
 **Posso usar só a planilha, na mão?**
 Pode. Cada planilha em `planilhas/` é autossuficiente, com "como auditar", benchmark e "como corrigir" em cada item.

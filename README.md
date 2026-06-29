@@ -58,7 +58,16 @@ Tudo que a IA produzir fica em `auditorias/<nome-do-cliente>/`:
 Sim. A IA te ensina a exportar o CSV do gerenciador e você entrega — a auditoria acontece do mesmo jeito.
 
 **Funciona em qual IA?**
-Claude Code, Codex, Antigravity e Gemini — as habilidades estão escritas para todas. No Antigravity, abra a pasta e a IA já lista as habilidades; comece pela `iniciar`. Em qualquer uma, o ponto de partida é sempre `iniciar`.
+Claude Code, Codex, Antigravity e Gemini — as habilidades estão escritas para todas. Em qualquer uma, o ponto de partida é sempre a habilidade `iniciar`. Como disparar:
+
+| IA | Como começar |
+|---|---|
+| **Claude Code** | digite `/iniciar` (ou só "iniciar auditoria") |
+| **Codex** | escreva "iniciar auditoria do cliente X" — ele carrega sozinho |
+| **Antigravity** | abra a pasta e escreva "iniciar auditoria" — ele carrega a habilidade sozinho |
+| **Gemini** | escreva "iniciar auditoria" — ele ativa a habilidade |
+
+> Obs.: **Antigravity é o agente do Google, baseado no Gemini** — na prática, mesma família. Funciona igual nos dois: você descreve a tarefa e a IA assume. Só o Claude Code tem o atalho de barra (`/iniciar`).
 
 **Posso usar só a planilha, na mão?**
 Pode. Cada planilha em `planilhas/` é autossuficiente, com "como auditar", benchmark e "como corrigir" em cada item.

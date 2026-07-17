@@ -7,13 +7,36 @@ description: Gera o relatório final aprofundado de uma auditoria do Blackbox. U
 
 Consolida tudo que foi auditado num relatório aprofundado e acionável. Lê os achados (`auditorias/<cliente>/achados/`) e as planilhas preenchidas (`auditorias/<cliente>/planilhas/`).
 
+## Padrão de referência (validado em auditorias reais, jul/2026)
+
+O formato-padrão de entrega é o **documento HTML único** gerado por script (`gerar_final.py` + checklist
+exportado das planilhas preenchidas em JSON). Regras do padrão:
+
+1. **Documento ÚNICO** — proibido mencionar rodadas/versões; toda seção diz a verdade do estado final.
+2. **Seções na ordem:** hero com números-chave → Funil (mapa verificado + teste real) → CRM (mostrando
+   também o que FUNCIONA, ex.: motor comercial vivo — nunca deixar parecer "tudo morto" se não for) →
+   Campanhas (com análise anúncio a anúncio) → **"O que deveria rodar — a estrutura ideal por
+   plataforma"** → Tracking → Performance → SEO/GEO → Experiência por ativo (prints + citações) →
+   Corrigir (tabela dos Críticos) → Otimizar (tabela dos Ajustar) → Cobertura → Plano em ondas.
+3. **"Como corrigir" em CADA achado** — nos alerts da narrativa e nas tabelas (coluna da planilha).
+4. **Estrutura ideal por plataforma** — tabelas por campanha/camada (papel, público, criativo, destino,
+   métrica) + a régua das 4 perguntas: que intenção ataca? para onde manda o lead? que conversão única
+   otimiza? como o CRM sabe que veio dela?
+5. **Precisão de atribuição** — NUNCA afirmar número de fonte sem acesso (ex.: verba do Meta sem a
+   conta); CTR ≠ conversão; amostra de 1 não vira taxa; rotular a fonte de cada número.
+6. **Cobertura honesta** — tabela por frente + lista de pendências com motivo e o que destrava.
+7. **Deploy** (se solicitado): pasta própria de deploy com prints comprimidos (JPG ~1600px, refs
+   ajustadas), hosting estático (ex.: Vercel) com token vindo de gerenciador seguro (nunca no chat/repo),
+   validar página + imagens com curl, avisar que a URL é pública — e SÓ após revisão e aprovação
+   explícita do usuário.
+
 ## Passo 1 — Formato
 Pergunte (se ainda não escolhido):
 
 > "Qual formato do relatório?
 > 1. **.md** — markdown, leve, fácil de editar.
 > 2. **Planilha** — consolida os checklists preenchidos num só arquivo, com a aba Resumo.
-> 3. **HTML** — apresentável pro cliente, no Design System V4 (`design-system-v4/`)."
+> 3. **HTML** — documento único no Design System V4 (padrão de referência; recomendado)."
 
 ## Passo 2 — Estrutura do relatório (vale pros 3 formatos)
 

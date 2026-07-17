@@ -90,5 +90,24 @@ Acione a skill **`relatorio`**:
 - Cruze sempre o achado com o **benchmark** da planilha antes de classificar o status.
 - Registre achados em `auditorias/<cliente>/achados/<frente>.md` conforme avança.
 
+## Método validado (auditorias reais, jul/2026) — a ordem que funciona
+
+1. **Funil primeiro.** Antes de auditar qualquer frente, mapear nas CONTAS (nunca em relato de call)
+   o que roda e para onde o lead vai — e escrever `mapa-funil.md`.
+2. **Janela fechada e idêntica** nas fontes acessíveis (ex.: 15 dias em Google Ads e CRM). Nunca
+   comparar janelas diferentes. No CRM, janela de entrada = campo "Criado em", não data de fechamento.
+3. **CRM antes de campanhas** — não adianta otimizar CPL se o destino do lead está quebrado.
+4. **Teste real de formulário ponta a ponta** (só com autorização explícita; dado claramente marcado como TESTE):
+   enviar com UTMs de teste, confirmar chegada no CRM E seguir o lead para dentro da automação
+   (n8n/Make: abrir o workflow, nós e execuções — somente leitura). Anotar os IDs dos cards de teste
+   e excluí-los ao final, com OK item a item do usuário.
+5. **Precisão de atribuição**: sem acesso a uma conta, nenhum número dela é afirmado (rotular como
+   "não auditável"); CTR ≠ conversão; amostra de 1 não vira taxa.
+6. **Somente leitura** em todo sistema do cliente; escrita apenas com OK explícito, item a item.
+7. Ao ler o CRM, reportar TAMBÉM o que funciona (ex.: funil comercial vivo) — o diagnóstico perde
+   credibilidade se pintar tudo como quebrado.
+8. O relatório final segue o padrão da skill `relatorio` (documento HTML único com "como corrigir"
+   em cada achado + "estrutura ideal por plataforma").
+
 ## Funciona em Claude Code, Codex, Antigravity e Gemini
 Esta skill é markdown puro e está espelhada em `.claude/skills/` e `.agents/skills/` (diretório cross-runtime lido por Codex, Gemini e Antigravity). No Antigravity, carregue-a lendo este `SKILL.md` com `view_file` (`IsSkillFile: true`). Não depende de ferramenta específica de nenhuma IA.

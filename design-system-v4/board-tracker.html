@@ -1,0 +1,132 @@
+<!-- ============================================================
+     BOARD DE ACOMPANHAMENTO — A fazer / Fazendo / Feito
+     Componente do kit Blackbox. Injetado antes de </body> pelo gerar_final.py.
+     Placeholders substituídos na geração: __DOC__, __SB_URL__, __SB_KEY__
+     Marca cada item de Corrigir, Otimizar e Plano com um seletor de status
+     compartilhado (Supabase). Sem chaves → cai em modo local (localStorage).
+     ============================================================ -->
+<style>
+  .bd-ctl{display:inline-flex;gap:5px;flex-wrap:wrap;vertical-align:middle}
+  .bd-pill{cursor:pointer;font-family:var(--f-mono);font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:5px 10px;border-radius:999px;border:1px solid var(--c-border);background:var(--c-bg-alt);color:var(--c-text-4);transition:all .12s;user-select:none;white-space:nowrap}
+  .bd-pill:hover{border-color:var(--c-text-4)}
+  .bd-pill.on[data-s="a_fazer"]{background:var(--c-text-4);border-color:var(--c-text-4);color:#fff}
+  .bd-pill.on[data-s="fazendo"]{background:var(--c-warning,#c77d00);border-color:var(--c-warning,#c77d00);color:#fff}
+  .bd-pill.on[data-s="feito"]{background:var(--c-success,#1a7f37);border-color:var(--c-success,#1a7f37);color:#fff}
+  .bd-row td{vertical-align:top}
+  td.bd-cell{white-space:nowrap;width:1%}
+  .bd-li{margin-top:6px}
+  .bd-prog{display:flex;align-items:center;gap:12px;margin:14px 0 4px;font-family:var(--f-mono);font-size:11px;color:var(--c-text-3)}
+  .bd-bar{flex:1;height:6px;border-radius:999px;background:var(--c-border);overflow:hidden;max-width:340px}
+  .bd-bar span{display:block;height:100%;width:0;background:var(--c-success,#1a7f37);transition:width .3s}
+  .bd-flag{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;font-family:var(--f-mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:var(--c-warning-soft,#fff4e0);color:var(--c-warning,#c77d00);border:1px solid var(--c-warning,#c77d00)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var DOC="__DOC__", SB_URL="__SB_URL__", SB_KEY="__SB_KEY__";
+  var STATES=[["a_fazer","A fazer"],["fazendo","Fazendo"],["feito","Feito"]];
+  var shared = !!(SB_URL && SB_KEY && SB_URL.indexOf("__")!==0);
+  var sb = shared ? supabase.createClient(SB_URL, SB_KEY) : null;
+  var state = {}; // item_id -> status
+
+  function hash(s){var h=5381;s=(DOC+"::"+s).toLowerCase().replace(/\s+/g," ").trim();for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))>>>0;}return h.toString(36);}
+
+  // Coleta os itens marcáveis: linhas de #corrigir e #otimizar, e <li> de #plano.
+  function collect(){
+    var items=[];
+    ["corrigir","otimizar"].forEach(function(sec){
+      var s=document.getElementById(sec); if(!s)return;
+      s.querySelectorAll("tbody tr").forEach(function(tr){
+        var strong=tr.querySelector("td strong"); if(!strong)return;
+        items.push({el:tr,kind:"tr",label:strong.textContent,sec:sec});
+      });
+    });
+    var plano=document.getElementById("plano");
+    if(plano) plano.querySelectorAll("ol > li").forEach(function(li){
+      var strong=li.querySelector("strong");
+      items.push({el:li,kind:"li",label:strong?strong.textContent:li.textContent.slice(0,60),sec:"plano"});
+    });
+    items.forEach(function(it){it.id=hash(it.label);});
+    return items;
+  }
+
+  function ctlHTML(id,cur){
+    return '<span class="bd-ctl" data-id="'+id+'">'+STATES.map(function(s){
+      return '<span class="bd-pill'+(cur===s[0]?" on":"")+'" data-s="'+s[0]+'">'+s[1]+'</span>';
+    }).join("")+'</span>';
+  }
+
+  function mount(items){
+    items.forEach(function(it){
+      var cur=state[it.id]||"a_fazer";
+      if(it.kind==="tr"){
+        var td=document.createElement("td"); td.className="bd-cell";
+        td.innerHTML=ctlHTML(it.id,cur); it.el.classList.add("bd-row"); it.el.appendChild(td);
+      }else{
+        var d=document.createElement("div"); d.className="bd-li";
+        d.innerHTML=ctlHTML(it.id,cur); it.el.appendChild(d);
+      }
+    });
+    // cabeçalho "Status" nas tabelas
+    ["corrigir","otimizar"].forEach(function(sec){
+      var s=document.getElementById(sec); if(!s)return;
+      s.querySelectorAll("thead tr").forEach(function(tr){
+        var th=document.createElement("th"); th.textContent="Status"; th.style.width="200px"; tr.appendChild(th);
+      });
+    });
+    document.querySelectorAll(".bd-pill").forEach(function(p){
+      p.addEventListener("click",function(){
+        var id=p.closest(".bd-ctl").getAttribute("data-id"), st=p.getAttribute("data-s");
+        setStatus(id,st);
+      });
+    });
+    progress(items);
+  }
+
+  function paint(id){
+    document.querySelectorAll('.bd-ctl[data-id="'+id+'"] .bd-pill').forEach(function(p){
+      p.classList.toggle("on", p.getAttribute("data-s")===(state[id]||"a_fazer"));
+    });
+  }
+
+  function progress(items){
+    [["corrigir","Corrigir"],["otimizar","Otimizar"],["plano","Plano"]].forEach(function(sc){
+      var secItems=items.filter(function(i){return i.sec===sc[0];});
+      if(!secItems.length)return;
+      var done=secItems.filter(function(i){return state[i.id]==="feito";}).length;
+      var doing=secItems.filter(function(i){return state[i.id]==="fazendo";}).length;
+      var sec=document.getElementById(sc[0]); if(!sec)return;
+      var head=sec.querySelector(".sec-head"); if(!head)return;
+      var bar=head.querySelector(".bd-prog");
+      if(!bar){bar=document.createElement("div");bar.className="bd-prog";head.appendChild(bar);}
+      var pct=Math.round(100*done/secItems.length);
+      bar.innerHTML='<strong>'+done+'/'+secItems.length+' feito</strong>'+(doing?' · '+doing+' em andamento':'')+
+        '<span class="bd-bar"><span style="width:'+pct+'%"></span></span>'+(shared?'':'<span class="bd-flag">modo local</span>');
+    });
+  }
+
+  function setStatus(id,st){
+    state[id]=st; paint(id); progress(window.__bdItems);
+    if(shared){ sb.from("auditoria_board").upsert({doc:DOC,item_id:id,status:st,updated_at:new Date().toISOString()},{onConflict:"doc,item_id"}).then(function(r){if(r.error)console.warn("board upsert",r.error);}); }
+    else { try{localStorage.setItem("bd_"+DOC+"_"+id,st);}catch(e){} }
+  }
+
+  async function load(){
+    if(shared){
+      var r=await sb.from("auditoria_board").select("item_id,status").eq("doc",DOC);
+      if(!r.error&&r.data) r.data.forEach(function(x){state[x.item_id]=x.status;});
+      sb.channel("bd_"+DOC).on("postgres_changes",{event:"*",schema:"public",table:"auditoria_board",filter:"doc=eq."+DOC},function(p){
+        var row=p.new||p.old; if(!row)return; state[row.item_id]=row.status?row.status:"a_fazer"; paint(row.item_id); progress(window.__bdItems);
+      }).subscribe();
+    }else{
+      for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf("bd_"+DOC+"_")===0)state[k.slice(("bd_"+DOC+"_").length)]=localStorage.getItem(k);}
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded",async function(){
+    var items=collect(); window.__bdItems=items;
+    await load();
+    mount(items);
+  });
+})();
+</script>

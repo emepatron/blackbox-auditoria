@@ -7,10 +7,11 @@ description: Gera o relatório final aprofundado de uma auditoria do Blackbox. U
 
 Consolida tudo que foi auditado num relatório aprofundado e acionável. Lê os achados (`auditorias/<cliente>/achados/`) e as planilhas preenchidas (`auditorias/<cliente>/planilhas/`).
 
-## Padrão de referência (validado em auditorias reais, jul/2026)
+## Padrão de referência (validado em Tecmakers/Tecprinters, jul/2026)
 
 O formato-padrão de entrega é o **documento HTML único** gerado por script (`gerar_final.py` + checklist
-exportado das planilhas preenchidas em JSON). Regras do padrão:
+exportado das planilhas em JSON). Exemplo canônico: `clientes/Recorrentes/Tecprinters/Tarefas/auditoria-2026-07/relatorio/`
+e https://auditoria-tecprinters.vercel.app. Regras do padrão:
 
 1. **Documento ÚNICO** — proibido mencionar rodadas/versões; toda seção diz a verdade do estado final.
 2. **Seções na ordem:** hero com números-chave → Funil (mapa verificado + teste real) → CRM (mostrando
@@ -25,10 +26,17 @@ exportado das planilhas preenchidas em JSON). Regras do padrão:
 5. **Precisão de atribuição** — NUNCA afirmar número de fonte sem acesso (ex.: verba do Meta sem a
    conta); CTR ≠ conversão; amostra de 1 não vira taxa; rotular a fonte de cada número.
 6. **Cobertura honesta** — tabela por frente + lista de pendências com motivo e o que destrava.
-7. **Deploy** (se solicitado): pasta própria de deploy com prints comprimidos (JPG ~1600px, refs
-   ajustadas), hosting estático (ex.: Vercel) com token vindo de gerenciador seguro (nunca no chat/repo),
-   validar página + imagens com curl, avisar que a URL é pública — e SÓ após revisão e aprovação
-   explícita do usuário.
+6.1 **Board de acompanhamento** (quando o time for executar as correções): injetar
+   `design-system-v4/board-tracker.html` antes de `</body>` — cada item de Corrigir, Otimizar e Plano
+   ganha um seletor **A fazer / Fazendo / Feito** + contador de progresso por seção, com estado
+   compartilhado via Supabase (todos veem o mesmo, em tempo real). Setup do backend:
+   `design-system-v4/board-setup.sql` num projeto Supabase **dedicado** (nunca reusar projeto com dados
+   de cliente — a chave publishable fica visível no HTML). Gerar com `SB_URL=... SB_KEY=... python3
+   gerar_final.py`; sem as variáveis o board cai em modo local (só para preview).
+7. **Deploy** (se solicitado): copiar para `~/Para deploy/auditoria-<cliente>/`, prints comprimidos
+   (`sips` → JPG 1600px, ajustar refs .png→.jpg), token `pass show V4-Company/infra/vercel-token`,
+   `npx vercel deploy --prod --yes`, validar página + imagens com curl, avisar que a URL é pública —
+   e SÓ após revisão e aprovação explícita do usuário.
 
 ## Passo 1 — Formato
 Pergunte (se ainda não escolhido):

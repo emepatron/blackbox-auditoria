@@ -30,7 +30,7 @@ Daí em diante a IA assume. Ela pergunta o que auditar, por quê, o contexto do 
 
 **A auditoria é sua. A IA é a ferramenta.**
 
-Quem assina o diagnóstico é o coordenador — a IA acelera, padroniza e aponta onde olhar, mas **nenhum achado vai pro cliente sem alguém do time ter validado na plataforma**. Isso corta as duas desculpas que destroem auditoria, e as duas são a mesma: *"a IA falou, então está certo"* e *"a IA errou"* — nenhuma das duas se sabe sem abrir a plataforma e conferir. Todo achado sai com fonte, janela, valor e status justamente para essa conferência levar 2 minutos. Caso real: numa auditoria, 2 de 3 pontos que o time jurou que "já estavam feitos" não estavam; na mesma leva, um achado correto de Google Ads foi descartado como "erro da IA sobre o Meta". A auditoria estava certa nas duas — faltou verificação de um lado e rótulo do outro. Regra prática: os pontos **Críticos, confira todos** antes de apresentar.
+Quem assina o diagnóstico é o coordenador — a IA acelera, padroniza e aponta onde olhar, mas **nenhum achado vai pro cliente sem alguém do time ter validado na plataforma**. Duas frases merecem o mesmo cuidado: *"a IA falou, então está certo"* e *"a IA errou"* — nenhuma das duas se sabe sem abrir a plataforma e conferir. Todo achado sai com fonte, janela, valor e status justamente para essa conferência levar 2 minutos. Caso real das primeiras auditorias: pontos dados como "já feitos" não estavam feitos, e um achado correto de Google Ads foi lido como "erro da IA sobre o Meta" por falta de rótulo. Nos dois casos, abrir a plataforma teria resolvido em minutos. Regra prática: os pontos **Críticos, confira todos** antes de apresentar.
 
 **A blackbox não é um botão. É uma auditoria feita a quatro mãos.**
 

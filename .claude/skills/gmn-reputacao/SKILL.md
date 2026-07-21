@@ -27,5 +27,9 @@ Reputação é ativo de conversão. Nota e volume importam, mas o que move ranqu
 - Sem acesso: use os prints de avaliações/posts (skill `gmn-coletar`); confira na visão pública se as avaliações recentes têm resposta e a data do último post.
 - Compare nota e volume com os top 3 concorrentes locais.
 
+## Copy das respostas
+
+A resposta a uma avaliação negativa é copy pública: quem lê não é quem reclamou, é quem está decidindo. Resposta padrão copiada, defensiva ou que discute com o cliente afasta mais do que a reclamação original. Quando for julgar a qualidade das respostas (e não só a existência delas), chame a skill `copy-auditar`.
+
 ## Saída
 Status de cada item das seções 1.3 e 1.4 + observações específicas (nota, % respondido, data do último post), para a skill `gmn-preencher`.

@@ -13,6 +13,7 @@ skills:
   - site-estrutura
   - site-conversao
   - site-preencher
+  - copy-auditar  # transversal
 
 gabarito: "planilhas/Auditoria de Site Institucional - V4.xlsx"
 

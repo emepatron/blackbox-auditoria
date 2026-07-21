@@ -27,3 +27,11 @@ como_funciona: |
   3. A aba Fundamentos (cross-channel) é responsabilidade do estrategista.
   4. A skill campanhas-preencher consolida os achados na planilha e em achados/campanhas.md.
   5. O estrategista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).
+
+escopo: |
+  Este squad audita a CONTA: mensuração, estrutura, públicos, orçamento e se existe operação criativa
+  saudável (variação, formatos, UGC). A skill campanhas-criativos julga a saúde criativa da conta —
+  não desce ao anúncio individual.
+  Auditoria peça a peça (hook, copy, veredito Manter/Ajustar/Matar, verba parada em criativo ruim)
+  é a frente Criativos, em squads/criativos/. Recomende-a sempre que o achado de conta indicar
+  problema criativo relevante.

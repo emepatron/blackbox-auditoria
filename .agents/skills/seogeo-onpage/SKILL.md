@@ -23,5 +23,11 @@ Com o técnico de pé, esta camada decide se a página merece rankear: relevânc
 ## Como auditar
 Trabalhe sobre o HTML público das páginas-chave: leia `<title>`, `<meta description>`, headings, `alt`, links internos e o JSON-LD. Para intenção e autoridade temática, compare com o que já rankeia no nicho. Não tendo como medir um ponto, registre como lacuna.
 
+## Copy — chame a skill `copy-auditar`
+
+Além de 1.2 e 1.3, esta skill cobre a seção **1.6 Copy de busca** — title e meta que ganham o clique, abertura que responde nas primeiras linhas (o que também torna o conteúdo citável por IA) e vocabulário do público em vez do interno.
+
+A `copy-auditar` é transversal: julga a copy como copywriter estrategista (nível de consciência, promessa, mecanismo, prova, objeção, CTA, coerência de funil), não como revisor de texto. Traga de lá o achado no formato de três partes — o que está escrito, por que não funciona, o que colocar no lugar — e registre nos itens de copy desta frente.
+
 ## Saída
 Status (OK / Ajustar / Crítico / N/A) de cada item, com o achado específico (qual página, qual ajuste), para a skill `seogeo-preencher`.

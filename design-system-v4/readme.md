@@ -6,7 +6,7 @@ Guia oficial e standalone do design system V4 em formato HTML interativo. Funcio
 
 ## Por que foi feito
 
-O Emerson recebeu o PPT da Carol (cliente externo Dog in Box) e ajustou aplicando a ID visual V4. Em vez de virar um trabalho repetitivo a cada cliente externo, o melhor caminho é **entregar o sistema** — não o resultado.
+O gatilho foi um PPT de cliente externo ajustado à mão para a identidade V4. Em vez de virar um trabalho repetitivo a cada cliente externo, o melhor caminho é **entregar o sistema** — não o resultado.
 
 Esse arquivo serve como "régua oficial" pra quem não é da V4 conseguir produzir materiais com a marca corretamente.
 
@@ -31,7 +31,7 @@ Esse arquivo serve como "régua oficial" pra quem não é da V4 conseguir produz
 ## Decisões tomadas
 
 - **HTML standalone vs MD**: HTML porque permite preview visual real dos componentes e copy-to-clipboard das cores. MD seria texto puro, perderia o impacto pedagógico.
-- **3 specs por componente**: O Emerson pediu pra servir tanto pra criar PPT, quanto imagem, quanto HTML — cada componente tem os 3 lado a lado pra remover ambiguidade.
+- **3 specs por componente**: O sistema precisa servir tanto pra criar PPT, quanto imagem, quanto HTML — cada componente tem os 3 lado a lado pra remover ambiguidade.
 - **Fontes do Google Fonts**: As 3 fontes (Space Grotesk, Inter, JetBrains Mono) são gratuitas e estão no Google Fonts e no Google Slides nativamente. Zero fricção pro time externo.
 - **Preview ao vivo**: Em vez de mockups estáticos, cada componente é renderizado de fato em CSS — quem abrir o HTML vê exatamente como deve ficar.
 - **Tokens canônicos**: Puxei os hex e nomes de variável direto do `ds-bundle.css` e `ds-theme-light.css` do Acervo Raízes (fonte canônica do DS V4).
@@ -49,20 +49,20 @@ Esse arquivo serve como "régua oficial" pra quem não é da V4 conseguir produz
 
 ### Abrir localmente
 ```bash
-open "/Users/emersonserra/Meus Projetos/Sistemas/[OS] Brain AI V4/output/design-system-v4/index.html"
+open "<pasta-do-projeto>/output/design-system-v4/index.html"
 ```
 
 ### Mandar pro time externo
 **Opção 1 (mais simples)** — zipar a pasta inteira e enviar:
 ```bash
-cd "/Users/emersonserra/Meus Projetos/Sistemas/[OS] Brain AI V4/output"
+cd "<pasta-do-projeto>/output"
 zip -r design-system-v4.zip design-system-v4/
 ```
 Eles descompactam e abrem `index.html` em qualquer navegador.
 
 **Opção 2 (link público)** — subir pra Vercel/Netlify/GitHub Pages:
 ```bash
-cd "/Users/emersonserra/Meus Projetos/Sistemas/[OS] Brain AI V4/output/design-system-v4"
+cd "<pasta-do-projeto>/output/design-system-v4"
 vercel --prod
 ```
 Gera URL tipo `design-system-v4.vercel.app` que pode ser compartilhado por link.

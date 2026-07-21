@@ -1,25 +1,40 @@
 ---
 name: campanhas-criativos
-description: Audita os criativos das campanhas (variações, formatos por posicionamento, hooks, UGC, legendas, alinhamento anúncio-destino). Use na auditoria de Campanhas quando for avaliar a qualidade criativa de uma plataforma — peso especialmente grande no Meta e no TikTok.
+description: Audita a saúde criativa da CONTA na frente de Campanhas — volume de variações por conjunto, formatos por posicionamento, presença de UGC, legendas e alinhamento anúncio-destino. Julga a operação criativa, não cada peça. Para auditar anúncio a anúncio (hook, copy, veredito Manter/Ajustar/Matar), a frente é Criativos.
 ---
 
-# Campanhas — Auditar criativos
+# Campanhas — Auditar a saúde criativa da conta
 
-O criativo é o maior alavancador de performance em mídia paga. Conta com bom público e verba mas criativo fraco não escala.
+O criativo é o maior alavancador de performance em mídia paga. Público bom com peça fraca não escala.
+
+Esta skill cobre a seção de criativos da planilha de Campanhas — o julgamento **da operação**: existe variação suficiente? os formatos estão certos? há UGC em teste? Ela não desce ao anúncio individual.
+
+> **Auditoria peça a peça é outra frente.** Se o pedido for "o que tem de errado nos anúncios", "analisa os criativos" ou "por que os anúncios não convertem", vá para a frente **Criativos** (`criativos-coletar` → `criativos-analisar` → `criativos-preencher`): ela baixa as peças, cruza com a verba e emite veredito por anúncio. Volte aqui só para o julgamento de conta.
+
+## Escopo: só o que está ATIVO
+
+Conte e julgue **campanhas ativas e anúncios ativos**, em qualquer rede. Peça pausada não entra na
+contagem de variações por conjunto nem em nenhum outro item — senão a conta parece ter esteira criativa
+que na prática não está no ar. Anúncio ativo dentro de campanha pausada não conta como ativo.
 
 ## O que verificar (cruze com a planilha-gabarito)
-1. **Volume de variações** por conjunto/grupo — pouca variação impede o algoritmo de aprender (mín. ~3 ativos).
-2. **Formato por posicionamento** — 9:16 para Reels/Stories/TikTok, 1:1 ou 4:5 para Feed. Criativo esticado mata performance.
-3. **Hook** nos primeiros 1-3s (vídeo) / primeira linha (texto) — precisa prender.
-4. **UGC / nativo** — peças no estilo orgânico costumam superar a peça de marca, sobretudo no TikTok.
-5. **Legendas** em vídeo (muita gente assiste sem som).
-6. **Alinhamento anúncio → destino** — a promessa do criativo bate com a primeira dobra da LP?
-7. **Texto/títulos** — variação suficiente, clareza, benefício (não só feature).
+
+1. **Volume de variações** por conjunto/grupo — pouca variação impede o algoritmo de aprender; excesso dilui e nenhuma peça sai da fase de aprendizagem. Faixa de trabalho: 3 a 5 ativas por conjunto.
+2. **Formato por posicionamento** — 9:16 para Reels/Stories/TikTok, 1:1 ou 4:5 para Feed. Criativo esticado ou com texto cortado queima verba em posicionamento nativo.
+3. **UGC / nativo em teste** — existe peça em linguagem orgânica competindo com a peça de marca? Em Meta e TikTok ela costuma vencer.
+4. **Legendas em vídeo** — a maioria assiste sem som.
+5. **Alinhamento anúncio → destino** — a promessa dos anúncios aparece na primeira dobra da página?
+6. **Variação de texto e título** — volume suficiente, com benefício em vez de característica.
+7. **Esteira de produção** — existe rotina de troca de criativo, ou a conta roda a mesma peça há meses? Frequência subindo com CTR caindo é fadiga criativa, não público errado.
 
 ## Como auditar
-- Com acesso: veja os criativos ativos no gerenciador ou na Biblioteca de Anúncios.
-- Sem acesso: peça prints/exports dos criativos ou o link da Biblioteca de Anúncios do cliente.
-- Avalie como espectador primeiro (o criativo prende?), como auditor depois (formato, variação, alinhamento).
+
+- Com acesso: veja os criativos ativos no gerenciador.
+- Sem acesso: a Biblioteca de Anúncios do Meta mostra o que está no ar sem precisar de conta — a skill `criativos-coletar` faz essa coleta.
+- Conte, não estime: peças ativas por conjunto, quantos formatos, quantas com legenda.
 
 ## Saída
-Status de cada item criativo + observações específicas (qual criativo, qual ajuste), para a skill `campanhas-preencher`.
+
+Status de cada item de criativo da planilha de Campanhas + observações específicas, para a `campanhas-preencher`.
+
+Quando o julgamento de conta apontar problema criativo relevante — e quase sempre aponta —, recomende abrir a frente **Criativos**. É lá que sai o número que abre a conversa com o cliente: quanto da verba está em peça que deveria sair do ar.

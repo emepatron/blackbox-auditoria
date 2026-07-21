@@ -18,5 +18,11 @@ Onde a conversão acontece (ou vaza). Tecnologia funcionando e UX ruim ainda per
 ## Como auditar
 Percorra a jornada completa no desktop e no mobile: home → categoria → PDP → carrinho → checkout. Anote toda fricção, campo desnecessário e quebra de confiança. A maioria do prejuízo está na PDP fraca e no checkout pesado no mobile.
 
+## Copy — chame a skill `copy-auditar`
+
+Esta skill também cobre a seção **2.7 Copy e mensagem** da aba: nome de produto, descrição que vende antes da ficha técnica, copy de frete/troca/garantia e a copy esquecida do checkout e do carrinho abandonado.
+
+A `copy-auditar` é transversal: julga a copy como copywriter estrategista (nível de consciência, promessa, mecanismo, prova, objeção, CTA, coerência de funil), não como revisor de texto. Traga de lá o achado no formato de três partes — o que está escrito, por que não funciona, o que colocar no lugar — e registre nos itens de copy desta frente.
+
 ## Saída
 Status (OK / Ajustar / Crítico / N/A) de cada item, registrado para `ecommerce-preencher`. Marque **Crítico** o que quebra a venda direto (CTA escondido, checkout mobile travado, layout não responsivo).

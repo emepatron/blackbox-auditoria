@@ -1,0 +1,32 @@
+name: Auditoria de Criativos
+code: criativos
+description: "Squad que audita os criativos de mídia paga peça a peça — coleta os anúncios que estão no ar, cruza cada um com o que consome de verba e julga copy e visual separadamente, fechando com Manter / Ajustar / Matar. Complementa a frente de Campanhas, que audita conta, estrutura e mensuração."
+icon: "🎬"
+version: "1.0.0"
+
+agents:
+  - agents/analista-criativos.agent.md
+
+skills:
+  - criativos-coletar
+  - criativos-analisar
+  - criativos-preencher
+  - copy-auditar  # transversal
+
+gabarito: "planilhas/Auditoria de Criativos - V4.xlsx"
+
+como_funciona: |
+  1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma plataformas ativas e oferta principal.
+  2. A skill criativos-coletar baixa as peças: Meta pela Biblioteca de Anúncios (pública, sem acesso à conta);
+     Google, TikTok e LinkedIn pelo gerenciador do cliente em modo SOMENTE LEITURA.
+  3. As peças são cruzadas com o export no nível de anúncio (gasto, CTR, CPL) para definir o recorte:
+     de cima para baixo por gasto, até cobrir ~80% da verba ou 20 peças.
+  4. A skill criativos-analisar julga cada peça contra a régua da aba Critérios e fecha os três vereditos
+     (copy, visual, peça).
+  5. A skill criativos-preencher consolida na planilha e em achados/criativos.md.
+  6. O analista sintetiza e devolve o controle para a skill iniciar (próxima frente ou relatório).
+
+relacao_com_campanhas: |
+  Campanhas audita a CONTA: mensuração, estrutura, públicos, orçamento, e se existe variação criativa suficiente.
+  Criativos audita a PEÇA: o que cada anúncio diz e mostra, e quanto de verba está em criativo que deveria sair do ar.
+  Uma não substitui a outra. Rodar Campanhas antes dá o contexto de conta que a auditoria de peça usa como referência.

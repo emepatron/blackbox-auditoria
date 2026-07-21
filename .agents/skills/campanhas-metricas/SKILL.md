@@ -7,6 +7,22 @@ description: Lê e avalia as métricas das campanhas contra os benchmarks (CTR, 
 
 Número solto não diz nada. Métrica só vira diagnóstico quando comparada ao benchmark e à meta do cliente.
 
+## Escopo: só o que está ATIVO
+
+**Regra fixa da blackbox, em qualquer rede (Meta, Google, TikTok, LinkedIn):** a auditoria analisa
+**campanhas ativas e anúncios ativos**. Campanha pausada, conjunto encerrado, anúncio desativado e
+histórico não entram na análise, não recebem status e não contam na verba analisada.
+
+Por quê: a auditoria existe para mudar o que está acontecendo agora. Achado sobre o que já saiu do ar
+não vira ação, infla o relatório e dilui o que importa.
+
+Duas armadilhas: (a) **anúncio ativo dentro de campanha pausada não é ativo** — confira os dois níveis;
+(b) exportar o período inteiro traz gasto de campanha encerrada, o que distorce todo percentual de
+verba. Filtre por status antes de calcular qualquer coisa.
+
+Leitura de histórico ("o que já foi testado") só em pedido explícito, em seção separada e rotulada —
+nunca misturada aos achados.
+
 ## Antes de tudo: o CPA-alvo do cliente
 Calcule o CPL/CPA-alvo a partir do **ticket médio** e da margem que o cliente aceita pagar por venda. É contra isso que o custo por resultado deve ser lido — não contra uma média genérica de mercado.
 

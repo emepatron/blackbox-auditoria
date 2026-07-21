@@ -23,5 +23,11 @@ O institucional precisa que o visitante ache o que quer e tenha motivo para conf
 - Navegue o site inteiro como um visitante primeiro (acho o que quero? confio?), como auditor depois (cada item acima).
 - É institucional: avalie presença e credibilidade — não conversão de oferta única (isso é landing page) nem catálogo (isso é e-commerce).
 
+## Copy — chame a skill `copy-auditar`
+
+Além de 1.2 e 1.3, esta skill cobre a seção **1.6 Copy e mensagem** — onde mora o problema mais comum do site institucional: texto que serviria para qualquer empresa do setor.
+
+A `copy-auditar` é transversal: julga a copy como copywriter estrategista (nível de consciência, promessa, mecanismo, prova, objeção, CTA, coerência de funil), não como revisor de texto. Traga de lá o achado no formato de três partes — o que está escrito, por que não funciona, o que colocar no lugar — e registre nos itens de copy desta frente.
+
 ## Saída
 Status de cada item de 1.2 e 1.3 + observação específica (qual página, qual ajuste), para a skill `site-preencher`.

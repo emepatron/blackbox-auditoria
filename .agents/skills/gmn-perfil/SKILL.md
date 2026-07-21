@@ -28,5 +28,11 @@ A base da presença local. Perfil não verificado, NAP divergente ou categoria g
 - Avalie a categoria comparando com o que concorrentes bem posicionados usam.
 - Leia a descrição como cliente (explica o que faz?) e como SEO (tem os termos de busca?).
 
+## Copy — chame a skill `copy-auditar`
+
+Além de 1.1 e 1.2, esta skill cobre a seção **1.6 Copy do perfil e das respostas** — a primeira linha da descrição (o que aparece antes do "ver mais") e a copy dos posts.
+
+A `copy-auditar` é transversal: julga a copy como copywriter estrategista (nível de consciência, promessa, mecanismo, prova, objeção, CTA, coerência de funil), não como revisor de texto. Traga de lá o achado no formato de três partes — o que está escrito, por que não funciona, o que colocar no lugar — e registre nos itens de copy desta frente.
+
 ## Saída
 Status de cada item das seções 1.1 e 1.2 + observações específicas (qual campo diverge, qual ação), para a skill `gmn-preencher`.

@@ -13,6 +13,7 @@ skills:
   - ecommerce-aquisicao
   - ecommerce-posvenda
   - ecommerce-preencher
+  - copy-auditar  # transversal
 
 gabarito: "planilhas/Checklist Auditoria E-commerce - V4.xlsx"
 

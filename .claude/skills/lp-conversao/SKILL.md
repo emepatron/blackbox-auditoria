@@ -31,5 +31,11 @@ Onde a página ganha ou perde lead. Lê primeiro como visitante novo (a oferta f
 - Mede a fricção do formulário: conte os campos e questione cada um.
 - Compare cada item com o benchmark da planilha antes de classificar.
 
+## Copy — chame a skill `copy-auditar`
+
+A seção **1.4 Copy e oferta** da planilha tem itens que exigem leitura de copy de verdade — nível de consciência x origem do tráfego, mecanismo, teste da substituição e linguagem genérica.
+
+A `copy-auditar` é transversal: julga a copy como copywriter estrategista (nível de consciência, promessa, mecanismo, prova, objeção, CTA, coerência de funil), não como revisor de texto. Traga de lá o achado no formato de três partes — o que está escrito, por que não funciona, o que colocar no lugar — e registre nos itens de copy desta frente.
+
 ## Saída
 Status de cada item das seções 1.3, 1.4 e 1.5 + observação concreta (qual bloco, qual ajuste), para a skill `lp-preencher`.

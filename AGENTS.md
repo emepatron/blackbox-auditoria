@@ -23,7 +23,8 @@ As skills vivem em `.claude/skills/` (Claude Code) e `.agents/skills/` (Codex, G
 ## Frentes e onde ficam
 | Frente | Squad | Planilha |
 |---|---|---|
-| Campanhas | `squads/campanhas/` | `planilhas/Auditoria de Campanhas - V4.xlsx` |
+| Campanhas (conta) | `squads/campanhas/` | `planilhas/Auditoria de Campanhas - V4.xlsx` |
+| Criativos (peça a peça) | `squads/criativos/` | `planilhas/Auditoria de Criativos - V4.xlsx` |
 | CRM | `squads/crm/` | `planilhas/Auditoria de CRM - V4.xlsx` |
 | Landing Page | `squads/landing-page/` | `planilhas/Auditoria de Landing Page - V4.xlsx` |
 | Site | `squads/site/` | `planilhas/Auditoria de Site Institucional - V4.xlsx` |
@@ -34,6 +35,7 @@ As skills vivem em `.claude/skills/` (Claude Code) e `.agents/skills/` (Codex, G
 ## Skills globais
 - `iniciar` — onboarding + roteamento + controle de fluxo.
 - `relatorio` — relatório final (.md / planilha / HTML Design System V4).
+- `copy-auditar` — transversal: julga a copy de qualquer ativo (anúncio, LP, e-commerce, site, GMN/SEO). Chamada pelas frentes, não roda sozinha.
 
 ## Saída
 Cada auditoria vive em `auditorias/<cliente>/` (dossiê, dados, planilhas preenchidas, achados, relatório).

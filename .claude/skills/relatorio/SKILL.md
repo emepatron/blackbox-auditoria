@@ -7,25 +7,41 @@ description: Gera o relatório final aprofundado de uma auditoria do Blackbox. U
 
 Consolida tudo que foi auditado num relatório aprofundado e acionável. Lê os achados (`auditorias/<cliente>/achados/`) e as planilhas preenchidas (`auditorias/<cliente>/planilhas/`).
 
-## Padrão de referência (validado em Tecmakers/Tecprinters, jul/2026)
+## Padrão de referência (validado em auditorias reais, jul/2026)
 
 O formato-padrão de entrega é o **documento HTML único** gerado por script (`gerar_final.py` + checklist
-exportado das planilhas em JSON). Exemplo canônico: `clientes/Recorrentes/Tecprinters/Tarefas/auditoria-2026-07/relatorio/`
-e https://auditoria-tecprinters.vercel.app. Regras do padrão:
+exportado das planilhas em JSON), publicado como página única. Regras do padrão:
 
 1. **Documento ÚNICO** — proibido mencionar rodadas/versões; toda seção diz a verdade do estado final.
 2. **Seções na ordem:** hero com números-chave → Funil (mapa verificado + teste real) → CRM (mostrando
    também o que FUNCIONA, ex.: motor comercial vivo — nunca deixar parecer "tudo morto" se não for) →
-   Campanhas (com análise anúncio a anúncio) → **"O que deveria rodar — a estrutura ideal por
-   plataforma"** → Tracking → Performance → SEO/GEO → Experiência por ativo (prints + citações) →
-   Corrigir (tabela dos Críticos) → Otimizar (tabela dos Ajustar) → Cobertura → Plano em ondas.
+   Campanhas (conta: mensuração, estrutura, públicos, orçamento) → **Criativos (galeria peça a peça —
+   ver 2.1)** → **"O que deveria rodar — a estrutura ideal por plataforma"** → Tracking → Performance →
+   SEO/GEO → Experiência por ativo (prints + citações) → Corrigir (tabela dos Críticos) → Otimizar
+   (tabela dos Ajustar) → Cobertura → Plano em ondas.
+2.1 **Seção Criativos — galeria** (quando a frente de Criativos foi auditada): a peça de um lado, o
+   parecer do outro. Uma peça por bloco, **ordenado por gasto** (a que come mais verba primeiro):
+   - **Esquerda:** a imagem, ou o frame de abertura do vídeo (o de 0-1s, que é o hook). Largura ~40%,
+     `border-radius` do DS, sem moldura decorativa.
+   - **Direita:** nome do anúncio · formato · gasto e % da verba · CTR e CPL (só se vieram do export) ·
+     os três vereditos como badges (COPY / VISUAL / PEÇA, verde-âmbar-vermelho) · o porquê em uma
+     frase · o "como corrigir" em Alert.
+   - **Abertura da seção:** o número que importa — *"R$ X (Y% da verba analisada) está em criativo com
+     veredito Matar"* — em KPI Card, seguido dos 3 a 5 achados transversais.
+   - **Fechamento:** cobertura da frente (peças ativas × auditadas × % da verba).
+   - Imagens comprimidas junto com os demais prints (`sips` → JPG 1600px). Vídeo **não** é embutido —
+     usa-se o frame; o relatório é documento único, não player.
+   - Se a peça veio da Biblioteca de Anúncios (sem métrica), o bloco mostra o parecer sem número e a
+     seção declara isso. Nunca estimar gasto para preencher a lacuna visual.
 3. **"Como corrigir" em CADA achado** — nos alerts da narrativa e nas tabelas (coluna da planilha).
 4. **Estrutura ideal por plataforma** — tabelas por campanha/camada (papel, público, criativo, destino,
    métrica) + a régua das 4 perguntas: que intenção ataca? para onde manda o lead? que conversão única
    otimiza? como o CRM sabe que veio dela?
 5. **Precisão de atribuição** — NUNCA afirmar número de fonte sem acesso (ex.: verba do Meta sem a
    conta); CTR ≠ conversão; amostra de 1 não vira taxa; rotular a fonte de cada número.
-6. **Cobertura honesta** — tabela por frente + lista de pendências com motivo e o que destrava.
+6. **Cobertura honesta** — tabela por frente + lista de pendências com motivo e o que destrava. Em
+   Campanhas e Criativos, deixar explícito que o recorte é **só o que está ativo** — para o cliente não
+   ler a ausência de uma campanha antiga como falha da auditoria.
 6.1 **Board de acompanhamento** (quando o time for executar as correções): injetar
    `design-system-v4/board-tracker.html` antes de `</body>` — cada item de Corrigir, Otimizar e Plano
    ganha um seletor **A fazer / Fazendo / Feito** + contador de progresso por seção, com estado

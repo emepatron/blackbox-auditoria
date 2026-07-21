@@ -26,6 +26,24 @@ Daí em diante a IA assume. Ela pergunta o que auditar, por quê, o contexto do 
 
 ---
 
+## Leia isto antes de rodar a primeira vez
+
+**A blackbox não é um botão. É uma auditoria feita a quatro mãos.**
+
+A IA sabe o método, os benchmarks e onde olhar. Você sabe do cliente: o histórico, o que já foi tentado, o que o comercial escuta, por que aquela campanha existe. A auditoria boa sai do encontro dos dois — e ela vai te perguntar isso o tempo todo.
+
+**Converse durante a auditoria.** Ao fim de cada frente a IA para, resume em linguagem simples e pergunta se fez sentido. Esse é o momento mais importante: é onde você entende a lógica e onde você corrige a leitura dela com o que só você sabe.
+
+**Pergunte tudo que não entender.** Não existe pergunta boba aqui — "o que é EMQ?", "por que frequência 4 é ruim?", "por que isso é crítico e aquilo não?". A IA é obrigada a traduzir o jargão e explicar o mecanismo, não só dar o veredito. Se ela usar uma sigla sem explicar, cobre.
+
+**Por que isso importa de verdade:** você vai apresentar essa auditoria para o cliente. Achado que você não consegue explicar com as suas palavras é achado que cai na primeira pergunta dele. Se ao fim você não sabe defender o diagnóstico, a auditoria não terminou — volte e pergunte.
+
+**Discorde quando achar que está errado.** Você conhece o cliente. Se um achado não bate com a realidade, diga — a IA vai mostrar a evidência que a levou até ali, e muitas vezes o seu contexto é o que muda o veredito. Isso melhora a auditoria, não atrapalha.
+
+**Compartilhe com quem opera.** Leve os achados para o gestor de tráfego, para o comercial, para quem responde as avaliações do Google. Auditoria discutida vira ação; auditoria entregue por e-mail vira arquivo.
+
+---
+
 ## O que cada frente audita
 
 ### Campanhas — a conta
@@ -81,9 +99,27 @@ Tudo em `auditorias/<nome-do-cliente>/`:
 | `achados/` | Os achados por frente |
 | `relatorio/` | O relatório final |
 
-O relatório sai em três formatos, à sua escolha: **`.md`**, **planilha consolidada** ou **HTML no Design System V4** — documento único, apresentável, com "como corrigir" em cada achado, galeria dos criativos com o parecer ao lado da peça, plano em ondas e uma seção de cobertura honesta dizendo o que não foi auditado e por quê.
+No fechamento, a IA pergunta duas coisas:
+
+**Formato** — **HTML** no Design System V4 (documento único, apresentável para o cliente) ou **`.md`** (leve, fácil de editar e colar em outro lugar).
+
+**Profundidade:**
+
+| | O que entrega |
+|---|---|
+| **Executivo** | 1 a 2 páginas: o número de abertura, os 5 achados que decidem e o plano. Para quem decide. |
+| **Completo** (padrão) | Narrativa por frente, "como corrigir" em cada achado, estrutura ideal por plataforma, tabelas de Corrigir e Otimizar, cobertura e plano em ondas. |
+| **Aprofundado** | O completo mais a evidência: prints, citações, dado bruto por frente e a galeria de criativos inteira. |
+
+A profundidade muda o que é **mostrado**, nunca o que foi **auditado**. Executivo não é auditoria rasa — é a mesma auditoria, apresentada curta. Em qualquer profundidade, a seção de cobertura existe: o cliente precisa saber o que não foi olhado.
 
 O HTML aceita um **board de acompanhamento** opcional: cada correção ganha um seletor *A fazer / Fazendo / Feito*, compartilhado entre todo mundo que abrir o link.
+
+### As planilhas preenchidas são ferramenta de trabalho, não anexo
+
+Suba `auditorias/<cliente>/planilhas/` no **Google Sheets** (Arquivo → Importar → Enviar) e bata com o time: cada um vê o status item a item, comenta na linha, marca o que já resolveu, e a aba Resumo recalcula sozinha. Menus suspensos e cores por status sobrevivem à importação — só confira a aba Resumo depois de importar.
+
+O relatório é a foto do diagnóstico, fechada na data. A planilha é o que continua viva durante a execução. Entregar só o relatório faz a auditoria virar documento de arquivo.
 
 ---
 

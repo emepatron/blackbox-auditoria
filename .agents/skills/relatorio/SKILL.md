@@ -1,6 +1,6 @@
 ---
 name: relatorio
-description: Gera o relatório final aprofundado de uma auditoria do Blackbox. Use quando a auditoria das frentes terminou e o usuário quer o entregável final, ou disser "gera o relatório", "fecha a auditoria", "quero o relatório final". Oferece 3 formatos — .md, planilha consolidada, ou HTML no Design System V4 — e produz o relatório a partir dos achados e das planilhas preenchidas em auditorias/<cliente>/.
+description: Gera o relatório final aprofundado de uma auditoria do Blackbox. Use quando a auditoria das frentes terminou e o usuário quer o entregável final, ou disser "gera o relatório", "fecha a auditoria", "quero o relatório final". Pergunta o formato (HTML no Design System V4 ou .md) e a profundidade (Executivo, Completo ou Aprofundado), e produz o relatório a partir dos achados e das planilhas preenchidas em auditorias/<cliente>/. Também orienta o usuário a subir as planilhas no Google Sheets para o time acompanhar.
 ---
 
 # Auditoria — Relatório Final
@@ -54,15 +54,58 @@ exportado das planilhas em JSON), publicado como página única. Regras do padr�
    `npx vercel deploy --prod --yes`, validar página + imagens com curl, avisar que a URL é pública —
    e SÓ após revisão e aprovação explícita do usuário.
 
-## Passo 1 — Formato
-Pergunte (se ainda não escolhido):
+## Passo 1 — Formato e profundidade
 
-> "Qual formato do relatório?
-> 1. **.md** — markdown, leve, fácil de editar.
-> 2. **Planilha** — consolida os checklists preenchidos num só arquivo, com a aba Resumo.
-> 3. **HTML** — documento único no Design System V4 (padrão de referência; recomendado)."
+Pergunte as duas coisas juntas, antes de escrever qualquer linha:
 
-## Passo 2 — Estrutura do relatório (vale pros 3 formatos)
+> "Vou fechar a auditoria. Duas escolhas:
+>
+> **Formato**
+> 1. **HTML** — documento único no Design System V4, apresentável para o cliente (recomendado)
+> 2. **.md** — markdown, leve, fácil de editar e colar em outro lugar
+>
+> **Profundidade**
+> 1. **Executivo** — 1 a 2 páginas: o número de abertura, os 5 achados que decidem e o plano. Para quem vai decidir, não para quem vai executar.
+> 2. **Completo** — o padrão: narrativa por frente, 'como corrigir' em cada achado, estrutura ideal por plataforma, tabelas de Corrigir e Otimizar, cobertura e plano em ondas.
+> 3. **Aprofundado** — o completo mais a evidência: prints, citações, dado bruto por frente e a galeria de criativos inteira em vez do recorte.
+>
+> Se não escolher, faço **HTML + Completo**."
+
+### O que muda em cada profundidade
+
+| | Executivo | Completo (padrão) | Aprofundado |
+|---|---|---|---|
+| Achados | os 5 de maior impacto | todos, por frente | todos + evidência de cada um |
+| "Como corrigir" | só nos 5 | em cada achado | em cada achado, com passo a passo |
+| Estrutura ideal por plataforma | não entra | entra | entra, com tabela por campanha |
+| Criativos | os 3 piores | o recorte auditado (~80% da verba) | todas as peças coletadas |
+| Prints e citações | não | os que sustentam achado crítico | todos |
+| Cobertura | uma linha | tabela por frente | tabela + o que destrava cada pendência |
+
+**A profundidade muda o que é MOSTRADO, nunca o que foi AUDITADO.** Executivo não é auditoria rasa: é a mesma auditoria, apresentada curta. E em qualquer profundidade a seção de cobertura existe — o cliente precisa saber o que não foi olhado.
+
+## Passo 1.1 — As planilhas são entregável, e são de trabalho
+
+Diga ao usuário, sempre, ao entregar:
+
+> "As planilhas preenchidas estão em `auditorias/<cliente>/planilhas/`. Elas não são anexo do relatório
+> — são a ferramenta de trabalho. Suba no Google Sheets (Arquivo → Importar → Enviar) e você tem o
+> checklist ao vivo para bater com o time: cada um vê o status item a item, comenta na linha, marca o
+> que já foi resolvido e a aba Resumo recalcula sozinha."
+
+Por que isso importa: o relatório é a foto do diagnóstico, fechada na data. A planilha é o que continua
+vivo depois — é nela que o time acompanha a execução. Entregar só o relatório faz a auditoria virar
+documento de arquivo.
+
+Ao subir para o Sheets, os menus suspensos, as cores por status e as fórmulas da aba Resumo costumam
+sobreviver à importação. Peça para conferir a aba Resumo depois de importar; se algum número não bater,
+é a fórmula que não converteu, não o preenchimento.
+
+Para acompanhamento dentro do próprio relatório HTML, existe o **board** (ver 6.1) — o seletor
+A fazer / Fazendo / Feito. Sheets e board resolvem a mesma necessidade por caminhos diferentes:
+o Sheets é melhor para o time operar, o board é melhor para o cliente enxergar progresso.
+
+## Passo 2 — Estrutura do relatório (vale para os dois formatos)
 
 1. **Sumário executivo** — o que foi auditado, contexto do cliente, e os 3-5 achados mais importantes.
 2. **Diagnóstico por frente** — para cada frente auditada:
@@ -80,9 +123,6 @@ Regras: nada de inventar. Todo achado vem dos dados coletados e do status da pla
 ### .md
 Escreva em `auditorias/<cliente>/relatorio/relatorio.md` seguindo a estrutura acima.
 
-### Planilha
-Consolide os checklists preenchidos das frentes num único `.xlsx` em `auditorias/<cliente>/relatorio/`, mantendo o padrão visual V4 (use o mesmo motor das planilhas em `planilhas/`). Inclua a aba Resumo somando o status de todas as frentes.
-
 ### HTML (Design System V4)
 Gere um `relatorio.html` em `auditorias/<cliente>/relatorio/` usando a identidade de `design-system-v4/`:
 - Leia `design-system-v4/index.html` e `design-system-v4/readme.md` para tokens (cores, tipografia Space Grotesk + Inter + JetBrains Mono, componentes).
@@ -90,12 +130,24 @@ Gere um `relatorio.html` em `auditorias/<cliente>/relatorio/` usando a identidad
 - Sem emojis decorativos. Layout limpo, vermelho V4 como acento.
 - Aplique o checklist anti-IA (sem clichês de mercado, sem frases binárias).
 
+## Ao entregar, passe o relatório com a pessoa
+
+Não mande o arquivo e encerre. Quem vai apresentar isso ao cliente precisa saber sustentar cada
+achado — e na maioria das vezes não domina o assunto.
+
+Percorra com ela: os 3 achados mais importantes, o porquê de cada um em linguagem simples, e o que
+esperar de pergunta do cliente. Pergunte, explicitamente, se algum ponto ficou obscuro. Se ela não
+consegue explicar o achado com as próprias palavras, ele ainda não está entregue.
+
 ## Checklist final antes de entregar
 - Sumário executivo bate com os achados detalhados?
 - Todo achado tem base (dado + benchmark)?
 - Plano de ação está priorizado por impacto?
 - Lacunas (frentes/pontos não auditados) estão sinalizadas?
 - Formato escolhido foi gerado e salvo em `auditorias/<cliente>/relatorio/`?
+- A profundidade pedida foi respeitada (nem a mais, nem a menos)?
+- O usuário foi avisado de que pode subir as planilhas no Google Sheets para bater com o time?
+- Você passou os principais achados com a pessoa e confirmou que ela consegue explicá-los?
 
 ## Cross-IA
 Markdown puro, espelhada em `.claude/skills/` e `.agents/skills/`. Para HTML/planilha, usa apenas ferramentas locais (sem dependência de IA específica).

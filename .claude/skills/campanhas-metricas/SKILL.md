@@ -7,21 +7,28 @@ description: Lê e avalia as métricas das campanhas contra os benchmarks (CTR, 
 
 Número solto não diz nada. Métrica só vira diagnóstico quando comparada ao benchmark e à meta do cliente.
 
-## Escopo: só o que está ATIVO
+## Escopo: a janela auditada — o corte é o gasto, não o status
 
-**Regra fixa da blackbox, em qualquer rede (Meta, Google, TikTok, LinkedIn):** a auditoria analisa
-**campanhas ativas e anúncios ativos**. Campanha pausada, conjunto encerrado, anúncio desativado e
-histórico não entram na análise, não recebem status e não contam na verba analisada.
+**Regra fixa da blackbox, em qualquer rede:** entra na auditoria tudo que **consumiu verba dentro da
+janela analisada** (ex.: últimos 30 ou 60 dias) — **ativo OU pausado**. O que não gastou nada na
+janela fica fora: isso sim é histórico.
 
-Por quê: a auditoria existe para mudar o que está acontecendo agora. Achado sobre o que já saiu do ar
-não vira ação, infla o relatório e dilui o que importa.
+O status não filtra a coleta. Ele **rotula o achado**:
+- **Ativo** → achado de ação: o que fazer agora.
+- **Pausado dentro da janela** → achado de processo: quanto queimou antes de alguém pausar, e por que
+  demorou. Pausar não devolve o dinheiro — R$ 500 gastos em termo errado seguem gastos, e esse achado
+  desaparece se você filtrar por "só ativos". Caso real: termos de pesquisa ruins no Google Ads,
+  desativados dentro da janela, tinham queimado ~R$ 500 antes — e caíram na auditoria porque a janela
+  os pegou.
 
-Duas armadilhas: (a) **anúncio ativo dentro de campanha pausada não é ativo** — confira os dois níveis;
-(b) exportar o período inteiro traz gasto de campanha encerrada, o que distorce todo percentual de
-verba. Filtre por status antes de calcular qualquer coisa.
+Armadilhas:
+(a) **anúncio ativo dentro de campanha pausada não está rodando** — confira o status nos dois níveis
+    e rotule pelo nível mais restritivo;
+(b) **janela aberta infla o relatório** — sem período fechado, vira arqueologia. A janela é definida
+    no dossiê e é idêntica em todas as fontes.
 
-Leitura de histórico ("o que já foi testado") só em pedido explícito, em seção separada e rotulada —
-nunca misturada aos achados.
+Histórico anterior à janela ("o que já foi testado") só em pedido explícito, em seção separada.
+
 
 ## Antes de tudo: o CPA-alvo do cliente
 Calcule o CPL/CPA-alvo a partir do **ticket médio** e da margem que o cliente aceita pagar por venda. É contra isso que o custo por resultado deve ser lido — não contra uma média genérica de mercado.

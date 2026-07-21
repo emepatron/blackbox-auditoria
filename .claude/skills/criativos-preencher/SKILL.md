@@ -18,7 +18,7 @@ Uma **linha por criativo**, na aba da plataforma (`Meta Ads`, `Google Ads`, `Tik
 | B | Nome ou ID do anúncio (o mesmo do export, para rastrear depois) |
 | C | Campanha / conjunto |
 | D | Formato (menu suspenso) |
-| E | Situação — **na prática, sempre `Ativo`**: a auditoria só julga o que está no ar. `Pausado` só aparece se a peça foi pausada durante a auditoria (registre isso em "Por quê") |
+| E | Situação: `Ativo` ou `Pausado na janela`. O pausado com gasto na janela ENTRA — é o achado de processo (quanto queimou antes de pausarem) |
 | F–J | Gasto, % da verba, impressões, CTR, CPL/CPA — **só se vieram do export**. Sem fonte, deixe vazio. |
 | K–R | Os oito critérios: OK / Ajustar / Crítico / N/A |
 | S, T, U | Veredito copy, veredito visual, veredito da peça: Manter / Ajustar / Matar |
@@ -47,7 +47,8 @@ Escreva `auditorias/<cliente>/achados/criativos.md` com:
 
 ## Regras
 
-- **Só campanha ativa e anúncio ativo entram na planilha**, em qualquer rede. Peça pausada não recebe linha nem veredito, e não conta na verba analisada.
+- **Entra tudo que gastou dentro da janela**, ativo ou pausado — o status vai na coluna Situação, não no filtro. Peça sem gasto na janela fica fora.
+- **Todo número e todo achado saem rotulados**: plataforma · onde foi visto · janela · valor · status. Ex.: "Google Ads · termos de pesquisa · últimos 60 dias · R$ 500 · pausados em 14/07". Sem o rótulo, a discussão vira "a IA errou" em vez de "o que fazemos com isso".
 - Todo veredito vem de um achado real cruzado com a régua da aba Critérios — nunca do chute.
 - Onde faltou dado, deixe vazio e registre a lacuna. Célula vazia é honesta; número inventado destrói a auditoria inteira.
 - Não afirme verba de plataforma sem ter tido a fonte. Se a peça veio da Biblioteca de Anúncios, você tem a peça, não o gasto.

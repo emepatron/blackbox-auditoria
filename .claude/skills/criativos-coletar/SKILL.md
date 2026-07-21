@@ -9,19 +9,28 @@ Sem a peça na mão não existe auditoria de criativo, existe palpite. Esta skil
 
 Ela **não julga nada**. Quem julga é a `criativos-analisar`.
 
-## Escopo: só o que está ATIVO
+## Escopo: a janela auditada — o corte é o gasto, não o status
 
-**Regra fixa da blackbox, em qualquer rede (Meta, Google, TikTok, LinkedIn):** a auditoria analisa
-**campanhas ativas e anúncios ativos**. Campanha pausada, anúncio desativado, conjunto encerrado e
-histórico não entram na análise, não recebem status nem veredito, e não contam na verba analisada.
+**Regra fixa da blackbox, em qualquer rede:** entra na auditoria tudo que **consumiu verba dentro da
+janela analisada** (ex.: últimos 30 ou 60 dias) — **ativo OU pausado**. O que não gastou nada na
+janela fica fora: isso sim é histórico.
 
-Por quê: a auditoria existe para mudar o que está acontecendo agora. Achado sobre peça que já saiu do
-ar não vira ação, infla o relatório e dilui o que importa. Verba gasta em campanha encerrada é
-histórico — não é decisão pendente.
+O status não filtra a coleta. Ele **rotula o achado**:
+- **Ativo** → achado de ação: o que fazer agora.
+- **Pausado dentro da janela** → achado de processo: quanto queimou antes de alguém pausar, e por que
+  demorou. Pausar não devolve o dinheiro — R$ 500 gastos em termo errado seguem gastos, e esse achado
+  desaparece se você filtrar por "só ativos". Caso real: termos de pesquisa ruins no Google Ads,
+  desativados dentro da janela, tinham queimado ~R$ 500 antes — e caíram na auditoria porque a janela
+  os pegou.
 
-Se o cliente pedir explicitamente a leitura do histórico (o que já foi testado), isso é um pedido à
-parte: faça em seção separada, rotulada como histórico, e **nunca** misture com os achados da
-auditoria.
+Armadilhas:
+(a) **anúncio ativo dentro de campanha pausada não está rodando** — confira o status nos dois níveis
+    e rotule pelo nível mais restritivo;
+(b) **janela aberta infla o relatório** — sem período fechado, vira arqueologia. A janela é definida
+    no dossiê e é idêntica em todas as fontes.
+
+Histórico anterior à janela ("o que já foi testado") só em pedido explícito, em seção separada.
+
 
 ## Onde salvar
 
@@ -63,7 +72,7 @@ Abra `https://www.facebook.com/<usuario-da-pagina>/` no navegador e rode:
 https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&is_targeted_country=false&search_type=page&view_all_page_id=<ID>
 ```
 
-- `active_status`: **sempre `active`**. `inactive` e `all` só em pedido explícito de leitura de histórico, que é trabalho à parte.
+- `active_status`: comece com `active`. Se o export mostrar gasto relevante em anúncio pausado **dentro da janela**, rode de novo com `all` para achar essas peças — elas entram na auditoria como achado de processo.
 - `country`: `BR` para cliente nacional
 - Role a página até parar de carregar peça nova, senão só vem o primeiro lote.
 
@@ -166,9 +175,9 @@ Auditoria com fallback manual é auditoria completa. O que não pode é inventar
 
 É aqui que a auditoria deixa de ser opinião. O export CSV que a frente de Campanhas já pede (`auditorias/<cliente>/dados/`) tem uma linha por anúncio com gasto, impressões, CTR e resultado. Case pelo **nome do anúncio**.
 
-1. Leia o CSV no nível de anúncio (não de campanha) e **filtre por campanha ativa + anúncio ativo** antes de qualquer conta.
+1. Leia o CSV no nível de anúncio (não de campanha) e **filtre por gasto > 0 dentro da janela** — ativo ou pausado. Registre o status de cada linha.
 2. Normalize o nome dos dois lados (minúsculas, sem acento, sem espaço extra) antes de casar.
-3. Ordene por gasto, calcule o % da verba de cada peça e o acumulado — sobre a verba **das campanhas ativas**, não sobre a verba total do período.
+3. Ordene por gasto, calcule o % da verba de cada peça e o acumulado — sobre a verba total **da janela**.
 4. **Defina o recorte:** audite de cima para baixo até cobrir ~80% do gasto ou bater 20 peças, o que vier primeiro. O resto entra como contagem agregada.
 5. Registre a cobertura: quantas peças ativas existem, quantas foram auditadas, que % da verba isso representa.
 

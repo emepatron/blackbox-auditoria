@@ -11,11 +11,28 @@ Esta skill cobre a seção de criativos da planilha de Campanhas — o julgament
 
 > **Auditoria peça a peça é outra frente.** Se o pedido for "o que tem de errado nos anúncios", "analisa os criativos" ou "por que os anúncios não convertem", vá para a frente **Criativos** (`criativos-coletar` → `criativos-analisar` → `criativos-preencher`): ela baixa as peças, cruza com a verba e emite veredito por anúncio. Volte aqui só para o julgamento de conta.
 
-## Escopo: só o que está ATIVO
+## Escopo: a janela auditada — o corte é o gasto, não o status
 
-Conte e julgue **campanhas ativas e anúncios ativos**, em qualquer rede. Peça pausada não entra na
-contagem de variações por conjunto nem em nenhum outro item — senão a conta parece ter esteira criativa
-que na prática não está no ar. Anúncio ativo dentro de campanha pausada não conta como ativo.
+**Regra fixa da blackbox, em qualquer rede:** entra na auditoria tudo que **consumiu verba dentro da
+janela analisada** (ex.: últimos 30 ou 60 dias) — **ativo OU pausado**. O que não gastou nada na
+janela fica fora: isso sim é histórico.
+
+O status não filtra a coleta. Ele **rotula o achado**:
+- **Ativo** → achado de ação: o que fazer agora.
+- **Pausado dentro da janela** → achado de processo: quanto queimou antes de alguém pausar, e por que
+  demorou. Pausar não devolve o dinheiro — R$ 500 gastos em termo errado seguem gastos, e esse achado
+  desaparece se você filtrar por "só ativos". Caso real: termos de pesquisa ruins no Google Ads,
+  desativados dentro da janela, tinham queimado ~R$ 500 antes — e caíram na auditoria porque a janela
+  os pegou.
+
+Armadilhas:
+(a) **anúncio ativo dentro de campanha pausada não está rodando** — confira o status nos dois níveis
+    e rotule pelo nível mais restritivo;
+(b) **janela aberta infla o relatório** — sem período fechado, vira arqueologia. A janela é definida
+    no dossiê e é idêntica em todas as fontes.
+
+Histórico anterior à janela ("o que já foi testado") só em pedido explícito, em seção separada.
+
 
 ## O que verificar (cruze com a planilha-gabarito)
 

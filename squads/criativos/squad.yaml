@@ -19,8 +19,9 @@ como_funciona: |
   1. O analista lê o dossiê (auditorias/<cliente>/00-dossie.md) e confirma plataformas ativas e oferta principal.
   2. A skill criativos-coletar baixa as peças: Meta pela Biblioteca de Anúncios (pública, sem acesso à conta);
      Google, TikTok e LinkedIn pelo gerenciador do cliente em modo SOMENTE LEITURA.
-  3. As peças são cruzadas com o export no nível de anúncio (gasto, CTR, CPL) para definir o recorte:
-     de cima para baixo por gasto, até cobrir ~80% da verba ou 20 peças.
+  3. As peças são cruzadas com o export no nível de anúncio (gasto, CTR, CPL). Entra tudo que gastou
+     dentro da janela auditada — ativo ou pausado (o pausado vira achado de processo). Recorte:
+     de cima para baixo por gasto, até cobrir ~80% da verba da janela ou 20 peças.
   4. A skill criativos-analisar julga cada peça contra a régua da aba Critérios e fecha os três vereditos
      (copy, visual, peça).
   5. A skill criativos-preencher consolida na planilha e em achados/criativos.md.

@@ -38,10 +38,16 @@ exportado das planilhas em JSON), publicado como página única. Regras do padr�
    métrica) + a régua das 4 perguntas: que intenção ataca? para onde manda o lead? que conversão única
    otimiza? como o CRM sabe que veio dela?
 5. **Precisão de atribuição** — NUNCA afirmar número de fonte sem acesso (ex.: verba do Meta sem a
-   conta); CTR ≠ conversão; amostra de 1 não vira taxa; rotular a fonte de cada número.
+   conta); CTR ≠ conversão; amostra de 1 não vira taxa.
+5.1 **Todo achado rotulado, sem exceção**: plataforma · onde foi visto · janela · valor · status.
+   Ex.: *"Google Ads · termos de pesquisa · últimos 60 dias · R$ 500 · termos pausados em 14/07"*.
+   Achado sem rótulo já fez um ponto correto de Google Ads ser descartado como "erro da IA sobre o
+   Meta". O rótulo é o que torna cada ponto conferível em 2 minutos — e é o que protege a auditoria
+   de virar debate de opinião.
 6. **Cobertura honesta** — tabela por frente + lista de pendências com motivo e o que destrava. Em
-   Campanhas e Criativos, deixar explícito que o recorte é **só o que está ativo** — para o cliente não
-   ler a ausência de uma campanha antiga como falha da auditoria.
+   Campanhas e Criativos, declarar a **janela auditada** e o critério de corte (tudo que gastou na
+   janela, ativo ou pausado) — para ninguém ler a presença de uma campanha pausada como erro, nem a
+   ausência de uma antiga como buraco.
 6.1 **Board de acompanhamento** (quando o time for executar as correções): injetar
    `design-system-v4/board-tracker.html` antes de `</body>` — cada item de Corrigir, Otimizar e Plano
    ganha um seletor **A fazer / Fazendo / Feito** + contador de progresso por seção, com estado

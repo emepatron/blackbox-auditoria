@@ -92,6 +92,11 @@ O fallback manual garante que a auditoria SEMPRE acontece, mesmo sem integraçã
 
 ## Frente de Criativos — decisões de projeto
 
+0. **O corte é a janela, não o status.** Entra tudo que consumiu verba dentro do período auditado —
+   ativo ou pausado. Pausado com gasto na janela é achado de processo (quanto queimou antes da pausa);
+   sem gasto na janela é histórico e fica fora. Todo achado sai rotulado: plataforma · onde · janela ·
+   valor · status. Vale também para a frente de Campanhas.
+
 1. **Meta é blackbox de verdade.** A coleta usa a Biblioteca de Anúncios, que é pública: basta o @ da
    página. Não exige acesso à conta do cliente — o que mantém a frente utilizável em pré-proposta.
 2. **Google, TikTok e LinkedIn não têm biblioteca pública equivalente.** O caminho é o gerenciador do

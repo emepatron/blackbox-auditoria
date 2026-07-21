@@ -12,7 +12,7 @@ Leia a aba Critérios antes de julgar qualquer coisa. Ela é o gabarito — sem 
 ## Antes de começar
 
 1. `auditorias/<cliente>/criativos/inventario.csv` existe e está ordenado por gasto? Se não, volte para a `criativos-coletar`.
-1.1. **Só peça ativa entra.** Confirme campanha ativa E anúncio ativo. Peça pausada não recebe veredito — se aparecer no inventário, remova antes de começar.
+1.1. **Entra o que gastou na janela.** Peça ativa recebe veredito de ação. Peça pausada dentro da janela recebe leitura de processo: quanto gastou, o que estava errado nela, e quanto tempo levou até pausarem. Peça sem gasto na janela sai do inventário.
 2. Confirme o recorte: as peças que somam ~80% da verba, teto de 20. Anote quantas ficaram de fora.
 3. Confirme o que você tem de cada peça: arquivo, texto do anúncio, destino do clique, métricas. O que faltar vira lacuna declarada, nunca estimativa.
 

@@ -28,6 +28,7 @@ Escreva `auditorias/<cliente>/achados/campanhas.md` com:
 
 ## Regras
 - Todo status vem de um achado real cruzado com o benchmark — nunca preencha no chute.
+- **Toda observação sai rotulada**: plataforma · onde foi visto · janela · valor · status (ex.: "Google Ads · termos de pesquisa · últimos 60 dias · R$ 500 · pausados em 14/07"). É o que permite qualquer pessoa verificar o achado na plataforma — e é o que impede a discussão de virar "a IA errou".
 - Onde faltou dado, marque `N/A` ou deixe Pendente e registre a lacuna; não invente.
 
 ## Saída

@@ -28,6 +28,10 @@ Daí em diante a IA assume. Ela pergunta o que auditar, por quê, o contexto do 
 
 ## Leia isto antes de rodar a primeira vez
 
+**A auditoria é sua. A IA é a ferramenta.**
+
+Quem assina o diagnóstico é o coordenador — a IA acelera, padroniza e aponta onde olhar, mas **nenhum achado vai pro cliente sem alguém do time ter validado na plataforma**. Isso corta as duas desculpas que destroem auditoria, e as duas são a mesma: *"a IA falou, então está certo"* e *"a IA errou"* — nenhuma das duas se sabe sem abrir a plataforma e conferir. Todo achado sai com fonte, janela, valor e status justamente para essa conferência levar 2 minutos. Caso real: numa auditoria, 2 de 3 pontos que o time jurou que "já estavam feitos" não estavam; na mesma leva, um achado correto de Google Ads foi descartado como "erro da IA sobre o Meta". A auditoria estava certa nas duas — faltou verificação de um lado e rótulo do outro. Regra prática: os pontos **Críticos, confira todos** antes de apresentar.
+
 **A blackbox não é um botão. É uma auditoria feita a quatro mãos.**
 
 A IA sabe o método, os benchmarks e onde olhar. Você sabe do cliente: o histórico, o que já foi tentado, o que o comercial escuta, por que aquela campanha existe. A auditoria boa sai do encontro dos dois — e ela vai te perguntar isso o tempo todo.
@@ -78,9 +82,11 @@ Tecnologia (checkout, pagamento, frete, catálogo, rastreamento), design e UX da
 
 ---
 
-## Duas regras que valem para a auditoria inteira
+## Três regras que valem para a auditoria inteira
 
-**Só o que está ATIVO.** Em Campanhas e Criativos, a auditoria analisa campanha ativa e anúncio ativo, em qualquer rede. O que já foi pausado é histórico, não é decisão pendente — e histórico infla relatório sem gerar ação. Atenção: anúncio ativo dentro de campanha pausada **não** conta como ativo, e o export do período traz gasto de campanha encerrada, o que distorce todo percentual de verba.
+**O corte é a janela, não o status.** Em Campanhas e Criativos entra tudo que **consumiu verba dentro do período auditado** — ativo ou pausado. Campanha pausada que gastou na janela é achado de processo: quanto queimou antes de alguém pausar. Pausar não devolve o dinheiro. O que não gastou nada na janela fica fora — isso sim é histórico. Atenção: anúncio ativo dentro de campanha pausada não está rodando.
+
+**Todo achado sai rotulado.** Plataforma · onde foi visto · janela · valor · status — por exemplo: *"Google Ads · termos de pesquisa · últimos 60 dias · R$ 500 · pausados em 14/07"*. É o que permite qualquer pessoa do time abrir a plataforma e conferir o ponto em 2 minutos, e o que impede a conversa de virar "a IA errou" sem ninguém verificar.
 
 **Somente leitura no sistema do cliente.** Navegar, pré-visualizar, capturar tela, exportar: sim. Pausar, editar, duplicar, excluir, alterar orçamento: não, nunca. O gerenciador de anúncios é produção — um clique errado custa dinheiro do cliente. Informação que só existe atrás de uma tela de edição vira lacuna registrada, não risco assumido.
 

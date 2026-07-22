@@ -53,11 +53,14 @@
     // MODO CHECKLIST (só se o documento não tiver as seções acima)
     if(!items.length){
       document.querySelectorAll("li").forEach(function(li){
-        var t=(li.textContent||"").trim();
-        if(!/^(\u{1F534}|\u{1F7E0}|⏸)/u.test(t)) return;      // 🔴 🟠 ⏸️
         if(li.querySelector("li")) return;                          // ignora item que agrupa outros
+        var t=(li.textContent||"").trim();
+        var chk=li.querySelector(':scope > input[type="checkbox"]'); // item de plano de ação
+        var diag=/^(\u{1F534}|\u{1F7E0}|⏸)/u.test(t);                // 🔴 🟠 ⏸️ (diagnóstico)
+        if(!chk && !diag) return;
+        if(chk){ chk.style.display="none"; }                          // esconde o checkbox decorativo
         var st=li.querySelector("strong");
-        items.push({el:li,kind:"li",label:(st?st.textContent:t).slice(0,90),sec:"checks"});
+        items.push({el:li,kind:"li",label:(st?st.textContent:t).slice(0,90),sec: chk?"acoes":"checks"});
       });
     }
     items.forEach(function(it){it.id=hash(it.label);});
@@ -105,15 +108,19 @@
     });
   }
 
+  var SEC_LABEL={corrigir:"",otimizar:"",plano:"",checks:"Diagnóstico",acoes:"Ações do plano"};
+
   function progBox(sec){
     var host, id="bd-prog-"+sec;
     var ex=document.getElementById(id); if(ex) return ex;
-    if(sec==="checks"){
-      // acima do primeiro bloco de checks (h2 da camada de auditoria, ou h1)
-      var h=[].slice.call(document.querySelectorAll("h2")).filter(function(x){return /camada 3|auditoria detalhada|check por check/i.test(x.textContent);})[0]
-             || document.querySelector("h1");
+    if(sec==="checks"||sec==="acoes"){
+      // âncora: checks → camada de auditoria; ações → topo do documento
+      var h = sec==="checks"
+        ? ([].slice.call(document.querySelectorAll("h2")).filter(function(x){return /camada 3|auditoria detalhada|check por check/i.test(x.textContent);})[0] || document.querySelector("h1"))
+        : document.querySelector("h1");
+      if(!h||!h.parentNode) return null;
       host=document.createElement("div"); host.id=id; host.className="bd-prog";
-      if(h&&h.parentNode) h.parentNode.insertBefore(host, h.nextSibling);
+      h.parentNode.insertBefore(host, h.nextSibling);
       return host;
     }
     var s=document.getElementById(sec); if(!s) return null;
@@ -123,14 +130,15 @@
   }
 
   function progress(items){
-    ["corrigir","otimizar","plano","checks"].forEach(function(sec){
+    ["corrigir","otimizar","plano","acoes","checks"].forEach(function(sec){
       var list=items.filter(function(i){return i.sec===sec;});
       if(!list.length)return;
       var box=progBox(sec); if(!box)return;
       var done=list.filter(function(i){return state[i.id]==="feito";}).length;
       var doing=list.filter(function(i){return state[i.id]==="fazendo";}).length;
       var pct=Math.round(100*done/list.length);
-      box.innerHTML='<strong>'+done+'/'+list.length+' feito</strong>'+(doing?' · '+doing+' em andamento':'')+
+      var rot=SEC_LABEL[sec]?SEC_LABEL[sec]+": ":"";
+      box.innerHTML='<strong>'+rot+done+'/'+list.length+' feito</strong>'+(doing?' · '+doing+' em andamento':'')+
         '<span class="bd-bar"><span style="width:'+pct+'%"></span></span>'+(shared?'':'<span class="bd-flag">modo local</span>');
     });
   }
